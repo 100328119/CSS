@@ -1,0 +1,63 @@
+/*********** 
+  Variables
+***********/
+@default-font-size: 12pt;
+@color-white: white;
+@color-primary: #1976D2;
+@color-secondary: #f44336;
+@color-success: green;
+@color-light: #FFF9C4;
+@box-shadow: 5px 5px 15px #333;
+
+/***********
+  Mixins
+***********/
+.full-screen {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.link-txt {
+  text-decoration: none;
+}
+
+.underline {  
+
+  &::after {
+    display: block;
+    content: '';
+    border: 1px solid black;
+    border-radius: 15px;
+    width: inherit;
+    margin-top: 5px;
+  }
+}
+
+.error {
+  color: @color-secondary;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.sizeNormal {
+  font-size: @default-font-size;
+}
+
+.overflowAuto {
+  overflow: auto;
+}
+
+/***********
+  Styles
+***********/
+html, body {
+  .full-screen;
+}
+
+a {
+  .link-txt;
+  color: @color-primary;
+}

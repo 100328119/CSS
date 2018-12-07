@@ -1,0 +1,24 @@
+{
+  "name": "express-react-boilerplate",
+  "version": "1.0.0",
+  "description": "A starting point for projects using express as the back-end and react as the front-end.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/100328119/CSS.git"
+  },
+  "author": "Patrick Yu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/100328119/CSS/issues"
+  },
+  "homepage": "https://github.com/100328119/CSS#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}

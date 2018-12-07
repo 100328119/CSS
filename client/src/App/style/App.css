@@ -1,0 +1,47 @@
+/*********** 
+  Variables
+***********/
+/***********
+  Mixins
+***********/
+.full-screen {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.link-txt {
+  text-decoration: none;
+}
+.underline::after {
+  display: block;
+  content: '';
+  border: 1px solid black;
+  border-radius: 15px;
+  width: inherit;
+  margin-top: 5px;
+}
+.error {
+  color: #f44336;
+}
+.bold {
+  font-weight: bold;
+}
+.sizeNormal {
+  font-size: 12pt;
+}
+.overflowAuto {
+  overflow: auto;
+}
+/***********
+  Styles
+***********/
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: #1976D2;
+}
