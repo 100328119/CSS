@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const SemesterSchema = new Schema({
   type:{
     type:String,
-    default:'semseter'
+    default:'semester'
   },
   year:{
     type:Number,

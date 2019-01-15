@@ -1,0 +1,17 @@
+[
+  {
+    "type":"admin",
+    "admin_level":0,
+    "description":"Super Admin"
+  },
+  {
+    "type":"admin",
+    "admin_level":1,
+    "description":"doc admin"
+  },
+  {
+    "type":"admin",
+    "admin_level":2,
+    "description":"doc viewer"
+  }
+]

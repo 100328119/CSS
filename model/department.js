@@ -11,9 +11,13 @@ const DepartmentSchema = new Schema({
     required:true
   },
   department_chair:{
-    type:String
+    type:String,
+    default:""
   },
-  num_stuff:Number
+  num_stuff:{
+    type:Number,
+    default:0
+  }
 })
 
 let Department;

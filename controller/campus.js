@@ -9,6 +9,7 @@ module.exports.getAllCampus = (req, res, nex)=>{
 
 module.exports.addNewCampus = async (req, res, nex)=>{
   const NewCampus = new Campus(req.body);
+  //pre save duplication validation
   await NewCampus.save();
   res.status(200).json(NewCampus);
 }
@@ -16,7 +17,7 @@ module.exports.addNewCampus = async (req, res, nex)=>{
 module.exports.updateCampus = (req, res, nex)=>{
   Campus.findOneAndUpdate({_id:req.params._id}, req.body,{new:true},(err, campus)=>{
     if(err)return res.status(400).json(err);
-     return res.status(200).json(err);
+     return res.status(200).json(campus);
   })
 }
 

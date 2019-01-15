@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -63,6 +64,7 @@ const styles = theme => ({
 class Dashboard extends React.Component {
   state = {
     mobileOpen: false,
+    open: true,
   };
 
   handleDrawerToggle = () => {

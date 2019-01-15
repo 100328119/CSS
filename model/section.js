@@ -30,12 +30,12 @@ const SectionSchema = new Schema({
   },
   duration:{
     type: Number,
-    reqiured: true
+    required: true
   },
   instructor:[{
     type:InstructorSchema
   }],
-  semseter:{
+  semester:{
     type:SemesterSchema,
     required: true
   }

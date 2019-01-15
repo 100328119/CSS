@@ -9,11 +9,14 @@ const BuildingSchema = new Schema({
   },
   building_name:{
     type:String,
-    required:true,
-    unique:true,
-    dropDups:true
+    required:true
+    // unique:true,
+    // dropDups:true
   },
-  campus:CampusSchema
+  campus:{
+    type:CampusSchema,
+    default:{} // doesn;t work
+  }
 })
 
 let Building;

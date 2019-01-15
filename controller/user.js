@@ -17,7 +17,8 @@ let signToken = (user) =>{
 
 module.exports.Register =  async (req, res, nex)=>{
   //also need to validate nest schema
-  const {user_name, email, password, full_name, admin} = req.value.body;
+  // const {user_name, email, password, full_name, admin} = req.value.body;
+  const {user_name, email, password, full_name, admin} = req.body;
   //check whether the email is created
   const foundUser = await User.findOne({email});
   if(foundUser){

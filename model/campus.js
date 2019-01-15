@@ -8,12 +8,18 @@ const CampusSchema = new Schema({
   },
   campus_name:{
     type:String,
-    required:true,
-    unique: true,
-    dropDups:true
+    required:true,//cause refer object can't be empty feild
+    // unique: true,
+    // dropDups:true
   },
-  address:String,
-  postal_code:String
+  address:{
+    type:String,
+    default:''
+  },
+  postal_code:{
+    type:String,
+    default:''
+  }
 })
 
 let Campus;

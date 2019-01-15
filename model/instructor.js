@@ -21,9 +21,13 @@ const InstructorSchema = new Schema({
     required: true
   },
   availbality:{
-    type: String
+    type: Boolean,
+    default: true
   },
-  available_hour: Number
+  available_hour:{
+    type:Number,
+    default:0
+  }
 });
 
 let Instructor;

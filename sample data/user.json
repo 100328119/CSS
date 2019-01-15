@@ -1,0 +1,25 @@
+//admin level field incompleted
+{
+  "user_name":"test1",
+  "email":"test1@test.com",
+  "password":"test1",
+  "full_name":{
+    "first_name":"admin",
+    "last_name":"test1"
+  }
+}
+
+//complete version
+{
+  "user_name":"test2",
+  "email":"test2@test.com",
+  "password":"test2",
+  "full_name":{
+    "first_name":"admin",
+    "last_name":"test2"
+  },
+  "admin":{
+    "admin_level":0,
+    "description":"Super Admin"
+  }
+}

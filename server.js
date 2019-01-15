@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
+//allow communication between back and front
+const cors = require('cors');
 
 //imort db configuration
 const db = require('./config/dbconfig');
@@ -13,6 +15,7 @@ const app = express();
 
 //middlewares
 app.use(morgan('dev'));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'client/build')));

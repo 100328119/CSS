@@ -7,19 +7,33 @@ const RoomSchema = new Schema({
     type:String,
     default:'room'
   },
-  room_name:{
-    type:String,
+  room_num:{
+    type:Number,
     required:true,
-    unique:true,
-    dropDups:true
+    // unique:true,
+    // dropDups:true
   },
   equipment:{
-    pc:Boolean,
-    projector:Boolean,
-    num_seat:Number,
+    pc:{
+      type:Boolean,
+      default:false
+    },
+    projector:{
+      type:Boolean,
+      default:false
+    },
+    num_seat:{
+      type:Number,
+      default:0
+    }
   },
-  floor:Number,
-  building:BuildingSchema
+  floor:{
+    type:Number,
+    default:0
+  },
+  building:{
+    type:BuildingSchema
+  }
 })
 
 //method following seaction

@@ -1,4 +1,4 @@
-const {RoomSchema, Room} = require('../model/Room');
+const {RoomSchema, Room} = require('../model/room');
 
 module.exports.getAllRoom = (req, res, nex)=>{
   // const admins = await Admin.find();
@@ -10,6 +10,7 @@ module.exports.getAllRoom = (req, res, nex)=>{
 
 module.exports.addNewRoom = async (req, res, nex)=>{
   //req.body required to be modify to req.value.body
+  console.log(req.body);
   const NewRoom = new Room(req.body);
   //save method need to futher developed
   await NewRoom.save();

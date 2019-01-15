@@ -4,7 +4,7 @@ module.exports.getAllAdmin = (req, res, nex)=>{
   // const admins = await Admin.find();
   Admin.find((err, admins)=>{
     if(err) return res.status(400).json({err});
-    return res.status(200).json({admins});
+    return res.status(200).json(admins);
   })
 }
 

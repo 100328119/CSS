@@ -9,13 +9,20 @@ import './style/App.css';
 import Homepage from './pages/Homepage';
 import About from './pages/About';
 import Dashboard from './components/Dashboard';
-
+import Login from './components/login';
+import SignUp from './components/signup';
+import Test from './pages/test';
+import Test2 from './pages/test2';
 class App extends React.Component {
   showNavList = () => {
     return (
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/about" component={About} />
+        <Route path="/test" component={Test} />
+        <Route path="/test2" component={Test2} />
+        <Route exact path="/Login" component={Login} />
+        <Route path="/SignUp" render={()=> <SignUp /> }/>
       </Switch>
     )
   }
@@ -25,8 +32,8 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
-        <CssBaseline />
-        <Dashboard content={this.showNavList} title={appTitle} className='App' />
+      <CssBaseline />
+      <Dashboard content={this.showNavList} title={appTitle} className='App' />
       </React.Fragment>
     );
   }

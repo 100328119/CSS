@@ -7,8 +7,14 @@ const AdminSchema = new Schema({
     type:String,
     required:true,
     default:"admin"},
-  admin_level: Number,
-  description: String
+  admin_level:{
+    type:Number,
+    default:''
+  },
+  description:{
+    type:String,
+    default:''
+  }
 })
 
 const Admin = mongoose.model('admin', AdminSchema);

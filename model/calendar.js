@@ -12,16 +12,17 @@ const CalendarSchema = new Schema({
   },
   semester:{
     type:SemesterSchema,
-    required:true
+    required:true,
+    default:{}
   },
   owner:[{
-    user:UserSchema
+    type:String
   }],
   department:{
     type:DepartmentSchema
   },
   section:[{
-    type:SectionSchema
+    type:String
   }],
   calendar_status:{
     type:String,
