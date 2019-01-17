@@ -11,7 +11,21 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Hidden from '@material-ui/core/Hidden';
-import { pageNavListItems, otherPageNavListItems } from './tileData';
+import { Link, withRouter } from "react-router-dom";
+// Material-UI
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+
+// Icons
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ProjectsIcon from '@material-ui/icons/Assignment';
+import AccountIcon from '@material-ui/icons/AccountBox';
+import SignInIcon from '@material-ui/icons/Face';
+
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+import { pageNavListItems } from './tileData';
 
 const drawerWidth = 240;
 
@@ -62,6 +76,16 @@ const styles = theme => ({
 });
 
 class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.signOut = this.signOut.bind(this);
+  }
+
+  signOut() {
+    this.props.signOut();
+    this.props.history.push('/Homepage');
+  }
+
   state = {
     mobileOpen: false,
     open: true,
@@ -78,13 +102,40 @@ class Dashboard extends React.Component {
     const drawer = (
       <div>
         <div className={classes.drawerHeader}>
-          <div style={{ fontSize: '16pt', fontWeight: 'bold', }}>My Website</div>
+          <div style={{ fontSize: '16pt', fontWeight: 'bold', }}>CSS</div>
           <div style={{ fontSize: '10pt', }}>v1.0.0</div>
         </div>
         <Divider />
-        <List onClick={this.handleClick}>{pageNavListItems}</List>
+          <List onClick={this.handleClick}>{pageNavListItems}</List>
         <Divider />
-        <List>{otherPageNavListItems}</List>
+        <List onClick={this.handleClick}>
+        { !this.props.isAuth ?
+            [<Link to="/SignUp" key="signup">
+              <ListItem button>
+                <ListItemIcon>
+                  <SignInIcon />
+                </ListItemIcon>
+                <ListItemText primary="Sign Up" />
+              </ListItem>
+            </Link>,
+            <Link to="/Login" key="login">
+              <ListItem button>
+                <ListItemIcon>
+                  <SignInIcon />
+                </ListItemIcon>
+                <ListItemText primary="Sign In" />
+              </ListItem>
+            </ Link>]:null}
+          { this.props.isAuth ?
+            <Link to='/signout' key="logout" onClick={this.signOut}>
+              <ListItem button>
+                <ListItemIcon>
+                  <SignInIcon />
+                </ListItemIcon>
+                <ListItemText primary="Log Out" />
+              </ListItem>
+            </Link> : null}
+        </List>
       </div>
     )
 
@@ -121,7 +172,7 @@ class Dashboard extends React.Component {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden smDown implementation="css">
+         <Hidden smDown implementation="css">
           <Drawer
             variant='permanent'
             open
@@ -151,4 +202,12 @@ Dashboard.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(Dashboard);
+function mapStateToProps(state) {
+  return {
+    isAuth: state.auth.isAuthenticated
+  };
+}
+
+const DeshboardStyles = withStyles(styles, { withTheme: true })(Dashboard);
+
+export default connect(mapStateToProps, actions)(withRouter(DeshboardStyles));

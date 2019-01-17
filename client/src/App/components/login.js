@@ -11,7 +11,14 @@ import InputLabel from '@material-ui/core/InputLabel';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import classNames from 'classnames';
 import withStyles from '@material-ui/core/styles/withStyles';
+import {reduxForm, Field} from 'redux-form';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose'
+import * as actions from '../actions';
+import { withRouter } from "react-router-dom";
+import Snackbar from "./snackbar";
 
 const styles = theme => ({
   main: {
@@ -45,9 +52,31 @@ const styles = theme => ({
   },
 });
 
+const renderTextField = (
+  { input, label, meta: { touched, error }, ...custom },
+) => (
+  <Input
+    {...input}
+    {...custom}
+  />
+);
+
 class SignIn extends React.Component {
+  constructor(props){
+    super(props);
+    this.onSubmitForm = this.onSubmitForm.bind(this);
+  }
+
+  async onSubmitForm(FormData){
+    // call action creator
+    await this.props.login(FormData);
+    if(!this.props.errorMessage){
+      this.props.history.push('/about');
+    }
+  }
+
   render(){
-    const { classes } = this.props;
+    const { classes, handleSubmit } = this.props;
     return (
       <main className={classes.main}>
         <CssBaseline />
@@ -58,19 +87,25 @@ class SignIn extends React.Component {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={handleSubmit(this.onSubmitForm)}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input id="email" name="email" autoComplete="email" autoFocus />
+              <Field component={renderTextField} id="email" name="email" autoComplete="email" autoFocus />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>
-              <Input name="password" type="password" id="password" autoComplete="current-password" />
+              <Field component={renderTextField} name="password" type="password" id="password" autoComplete="current-password" />
             </FormControl>
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            { this.props.errorMessage ?
+              <Snackbar
+                variant="error"
+                className={classes.margin}
+                message= {this.props.errorMessage}
+              />:null}
             <Button
               type="submit"
               fullWidth
@@ -87,8 +122,21 @@ class SignIn extends React.Component {
   }
 }
 
+function mapStateToProps(state){
+  return{
+    errorMessage: state.auth.errorMessage
+  }
+}
+ const StylesWraper = withStyles(styles)(SignIn);
+
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignIn);
+// const FormWraper =  compose(connect(mapStateToProps, actions),reduxForm({form: 'signin'}))(StylesWraper);
+export default compose(
+   withRouter,
+   withStyles(styles),
+   connect(mapStateToProps, actions),
+   reduxForm({form: 'signin'}),
+)(SignIn);

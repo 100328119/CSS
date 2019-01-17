@@ -2,7 +2,7 @@
  ActionCreator -> create Actions -> dispatched -> middlewares -> reducers
 */
 import axios from 'axios';
-import { AUTH_SIGN_UP, AUTH_ERROR } from './type';
+import { AUTH_SIGN_UP, AUTH_ERROR, AUTH_SIGN_OUT, AUTH_SIGN_IN } from './type';
 export const signUp = (data) =>{
   return  async dispatch => {
     /*
@@ -19,6 +19,7 @@ export const signUp = (data) =>{
         payload:res.data.token
       })
       localStorage.setItem('JWT_TOKEN', res.data.token);
+      axios.defaults.headers.common['Authorization'] = res.data.token;
     }catch(err){
       dispatch({
         type: AUTH_ERROR,
@@ -27,4 +28,34 @@ export const signUp = (data) =>{
       console.error('error', err);
     }
   }
+}
+
+export const signOut = () => {
+  return dispatch => {
+    localStorage.removeItem('JWT_TOKEN');
+    axios.defaults.headers.common['Authorization'] = '';
+    dispatch({
+      type: AUTH_SIGN_OUT,
+      payload: ''
+    })
+  };
+}
+
+export const login = (data) => {
+  return async dispatch => {
+    try{
+      const res = await axios.post('http://localhost:4000/secure/signin',data);
+      dispatch({
+        type: AUTH_SIGN_IN,
+        payload:res.data.token
+      })
+      localStorage.setItem('JWT_TOKEN', res.data.token);
+      axios.defaults.headers.common['Authorization'] = res.data.token;
+    }catch(err){
+      dispatch({
+        type: AUTH_ERROR,
+        payload: "Incorrect Email or Password"
+      });
+    }
+  };
 }

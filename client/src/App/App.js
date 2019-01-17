@@ -13,22 +13,25 @@ import Login from './components/login';
 import SignUp from './components/signup';
 import Test from './pages/test';
 import Test2 from './pages/test2';
+import Pre_Calendar from './components/pre-calendar';
+
 class App extends React.Component {
   showNavList = () => {
     return (
       <Switch>
         <Route exact path="/" component={Homepage} />
-        <Route path="/about" component={About} />
-        <Route path="/test" component={Test} />
-        <Route path="/test2" component={Test2} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/test" component={Test} />
+        <Route exact path="/test2" component={Test2} />
         <Route exact path="/Login" component={Login} />
-        <Route path="/SignUp" render={()=> <SignUp /> }/>
+        <Route exact path="/SignUp" render={()=> <SignUp /> }/>
+        <Route exact path='/Pre_Calendar' component={Pre_Calendar}/>
       </Switch>
     )
   }
 
   render() {
-    const appTitle = 'My Project';
+    const appTitle = 'Coures Scheduler';
 
     return (
       <React.Fragment>

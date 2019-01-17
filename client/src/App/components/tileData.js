@@ -48,36 +48,6 @@ export const pageNavListItems = (
     </Link>
   </div>
 );
-
-export const otherPageNavListItems = (
-  <div>
-  <Link to="/SignUp">
-    <ListItem button>
-      <ListItemIcon>
-        <SignInIcon />
-      </ListItemIcon>
-      <ListItemText primary="Sign Up" />
-    </ListItem>
-  </Link>
-  <Link to="/Login">
-    <ListItem button>
-      <ListItemIcon>
-        <SignInIcon />
-      </ListItemIcon>
-      <ListItemText primary="Sign In" />
-    </ListItem>
-  </Link>
-  <Link to="/Logout">
-    <ListItem button>
-      <ListItemIcon>
-        <SignInIcon />
-      </ListItemIcon>
-      <ListItemText primary="Log Out" />
-    </ListItem>
-  </Link>
-  </div>
-);
-
 // <ListItem button>
 //   <ListItemIcon>
 //     <SignInIcon />
