@@ -1,4 +1,4 @@
-const {SemesterSchema, Semester} = require('../model/Semester');
+const {SemesterSchema, Semester} = require('../model/semester');
 
 module.exports.getAllSemester = (req, res, nex)=>{
   Semester.find((err, semester)=>{

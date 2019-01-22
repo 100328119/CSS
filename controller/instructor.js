@@ -1,4 +1,4 @@
-const {InstructorSchema, Instructor} = require('../model/Instructor');
+const {InstructorSchema, Instructor} = require('../model/instructor');
 
 module.exports.getAllInstructor = (req, res, nex)=>{
   Instructor.find((err, instructor)=>{

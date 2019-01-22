@@ -29,13 +29,37 @@ module.exports.Register =  async (req, res, nex)=>{
   await NewUser.save();
 
   const token = signToken(NewUser)
-
-  res.status(200).json({token:token, user: NewUser.email});
+  const user = {
+    role: "admin",
+    data: {
+      displayName: NewUser.user_name,
+      photoURL   : 'assets/images/avatars/Abbott.jpg',
+      email      : NewUser.email,
+      settings   : {},
+      shortcuts  : []
+    }
+  }
+  res.status(200).json({token:token, user: user});
 }
 
 module.exports.signIn = (req, res, nex)=>{
+  console.log(req.user);
   const token = signToken(req.user);
-  res.status(200).json({token});
+  const user = {
+    uuid: req.user._id,
+    from: "User_db",
+    role: "admin",
+    data: {
+      displayName: req.user.user_name,
+      photoURL   : 'assets/images/avatars/Abbott.jpg',
+      email      : req.user.email,
+      settings   : {},
+      shortcuts  : []
+    }
+  }
+  if(token){
+    res.status(200).json({access_token:token, user: user});
+  }
 }
 
 module.exports.UpdateProfile = (req, res, nex)=>{

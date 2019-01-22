@@ -1,4 +1,4 @@
-const {DepartmentSchema, Department} = require('../model/Department');
+const {DepartmentSchema, Department} = require('../model/department');
 
 module.exports.getAllDepartment = (req, res, nex)=>{
   Department.find((err, department)=>{
