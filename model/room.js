@@ -14,25 +14,14 @@ const RoomSchema = new Schema({
     // dropDups:true
   },
   equipment:{
-    pc:{
-      type:Boolean,
-      default:false
-    },
-    projector:{
-      type:Boolean,
-      default:false
-    },
-    num_seat:{
-      type:Number,
-      default:0
-    }
+    type:Object
   },
   floor:{
     type:Number,
     default:0
   },
   building:{
-    type:BuildingSchema
+    type:Object
   }
 })
 

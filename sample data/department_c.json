@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5c51e3c644c13b0421bb3277"},"type":"department","department_name":"Information Technology","department_chair":"Jendy Wu","num_staff":{"$numberInt":"20"}}
+{"_id":{"$oid":"5c51e3c644c13b0421bb3278"},"type":"department","department_name":"business","department_chair":"Chris Something","num_staff":{"$numberInt":"30"}}

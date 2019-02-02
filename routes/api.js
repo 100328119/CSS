@@ -3,6 +3,7 @@ const express = require('express');
 const router = require('express-promise-router')();
 const passport = require('passport');
 //customize library
+const {validateBody, schema} = require('../helper/routeHelper');
 const AdminController = require('../controller/admin');
 const CampusController = require('../controller/campus');
 const BuildingController = require('../controller/building');
@@ -38,8 +39,12 @@ router.route('/building')
   .post(BuildingController.addNewBuilding);
 
 router.route('/building/:_id')
+  .get(BuildingController.getBuildingByid)
   .put(BuildingController.updateBuilding)
   .delete(BuildingController.deleteBuilding);
+
+router.route('/building/campus/:_id')
+  .get(BuildingController.getBuildingByCamp);
 
 //room CRUD
 router.route('/room')
@@ -47,6 +52,7 @@ router.route('/room')
   .post(RoomController.addNewRoom);
 
 router.route('/room/:_id')
+  .get(RoomController.getRoomById)
   .put(RoomController.updateRoom)
   .delete(RoomController.deleteRoom);
 
@@ -74,8 +80,12 @@ router.route('/course')
   .post(CourseController.addNewCourse);
 
 router.route('/course/:_id')
+  .get(CourseController.getCourseById)
   .put(CourseController.updateCourse)
   .delete(CourseController.deleteCourse);
+
+router.route('/course/department/:_id')
+  .get(CourseController.getCourseByDpt);
 
 //Instructor CRUD
 router.route('/instructor')
@@ -98,11 +108,18 @@ router.route('/section/:_id')
 //Calendar CRUD
 router.route('/calendar')
   .get(CalendarController.getAllCalendar)
-  .post(CalendarController.addNewCalendar);
+  .post(validateBody(schema.calendarSchema),CalendarController.addNewCalendar);
 
 router.route('/calendar/:_id')
    .get(CalendarController.getOneCalendar)
-   .put(CalendarController.updateCalendar)
+   .put(validateBody(schema.calendarSchema),CalendarController.updateCalendar)
    .delete(CalendarController.deleteCaleder);
+
+//calendar get by owner , department
+router.route('/calendar/owner/:_id')
+  .get(CalendarController.getCalendarByOwner);
+
+router.route('/calendar/department/:_id')
+  .get(CalendarController.getCalendarByDpt);
 
 module.exports = router;

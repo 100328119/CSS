@@ -14,7 +14,7 @@ const DepartmentSchema = new Schema({
     type:String,
     default:""
   },
-  num_stuff:{
+  num_staff:{
     type:Number,
     default:0
   }

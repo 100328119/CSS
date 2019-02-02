@@ -9,16 +9,14 @@ const CampusSchema = new Schema({
   campus_name:{
     type:String,
     required:true,//cause refer object can't be empty feild
-    // unique: true,
-    // dropDups:true
+    unique: true,
+    dropDups:true
   },
   address:{
-    type:String,
-    default:''
+    type:String
   },
   postal_code:{
-    type:String,
-    default:''
+    type:String
   }
 })
 

@@ -11,33 +11,25 @@ const SectionSchema = new Schema({
     default:'section'
   },
   CRN:{
-    type:String,
-    required:true,
-    unique:true,
-    dropDups:true
+    type:String
   },
   course:{
     type:String,
-    required:true
   },
   section_num:{
     type:String,
-    required:true
   },
   room:{
-    type:RoomSchema,
-    required:true
+    type:String
   },
-  duration:{
-    type: Number,
-    required: true
+  from_time:{
+    type:String
   },
-  instructor:[{
-    type:InstructorSchema
-  }],
-  semester:{
-    type:SemesterSchema,
-    required: true
+  end_time:{
+    type:String,
+  },
+  instructor:{
+    type:String
   }
 })
 

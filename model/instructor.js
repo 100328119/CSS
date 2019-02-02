@@ -17,7 +17,7 @@ const InstructorSchema = new Schema({
     }
   },
   department:{
-    type:String,
+    type:Object,
     required: true
   },
   availbality:{

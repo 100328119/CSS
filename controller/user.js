@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
+
 const {UserSchema, User} = require('../model/user');
 const {JWT_SECRET} = require('../config/constant');
+const { EmbedAdmin } =  require('../helper/EmbedHelper/adminEmbed');
 
 let signToken = (user) =>{
   //generate JWT token
@@ -26,42 +28,53 @@ module.exports.Register =  async (req, res, nex)=>{
   }
   //create new user
   const NewUser = new User({user_name, email, password, full_name, admin});
-  await NewUser.save();
+  const save_user = await NewUser.save();
 
-  const token = signToken(NewUser)
-  const user = {
-    role: "admin",
-    data: {
-      displayName: NewUser.user_name,
-      photoURL   : 'assets/images/avatars/Abbott.jpg',
-      email      : NewUser.email,
-      settings   : {},
-      shortcuts  : []
-    }
-  }
-  res.status(200).json({token:token, user: user});
+  const token = signToken(save_user);
+
+  EmbedAdmin(save_user)
+    .then(user_embed =>{
+      const user = {
+        role: user_embed.admin.role,
+        data: {
+          displayName: user_embed.user_name,
+          photoURL   : 'assets/images/avatars/Abbott.jpg',
+          email      : user_embed.email,
+          settings   : {},
+          shortcuts  : []
+        }
+      }
+      return res.status(200).json({access_token:token, user: user});
+    }).catch(err=>{return res.status(400).json(err)})
 }
 
 module.exports.signIn = (req, res, nex)=>{
-  console.log(req.user);
-  const token = signToken(req.user);
-  const user = {
-    uuid: req.user._id,
-    from: "User_db",
-    role: "admin",
-    data: {
-      displayName: req.user.user_name,
-      photoURL   : 'assets/images/avatars/Abbott.jpg',
-      email      : req.user.email,
-      settings   : {},
-      shortcuts  : []
-    }
-  }
-  if(token){
-    res.status(200).json({access_token:token, user: user});
-  }
+  const login_user = req.user;
+
+  const token = signToken(login_user);
+  EmbedAdmin(login_user)
+    .then(user_embed =>{
+      console.log(token);
+      const user = {
+        uuid: user_embed._id,
+        from: "User_db",
+        role: user_embed.admin.role,
+        data: {
+          displayName: user_embed.user_name,
+          photoURL   : 'assets/images/avatars/Abbott.jpg',
+          email      : user_embed.email,
+          settings   : {},
+          shortcuts  : []
+        }
+      }
+      if(token){
+        return res.status(200).json({access_token:token, user: user});
+      }
+    })
+    .catch(err=>{ console.log(err);return res.status(400).json(err)})
 }
 
+// intend to be refactor
 module.exports.UpdateProfile = (req, res, nex)=>{
     delete req.body.password;
     delete req.body.email;

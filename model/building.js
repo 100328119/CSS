@@ -9,15 +9,15 @@ const BuildingSchema = new Schema({
   },
   building_name:{
     type:String,
-    required:true
-    // unique:true,
-    // dropDups:true
+    required:true,
+    unique:true,
+    dropDups:true
   },
   campus:{
-    type:CampusSchema,
-    default:{} // doesn;t work
+    type:Object,
   }
 })
+
 
 let Building;
 if(mongoose.models.building){

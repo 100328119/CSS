@@ -1,0 +1,5 @@
+{"_id":{"$oid":"5c51f00644c13b0421bb3287"},"type":"course","course_name":"Integration Project I","course_tag":"INFO","course_num":{"$numberInt":"4390"},"course_level":{"$numberInt":"4000"},"department":"5c51e3c644c13b0421bb3277"}
+{"_id":{"$oid":"5c51f00644c13b0421bb3288"},"type":"course","course_name":"Integration Project II","course_tag":"INFO","course_num":{"$numberInt":"4391"},"course_level":{"$numberInt":"4000"},"department":"5c51e3c644c13b0421bb3277"}
+{"_id":{"$oid":"5c51f00644c13b0421bb3289"},"type":"course","course_name":"content Management","course_tag":"INFO","course_num":{"$numberInt":"3120"},"course_level":{"$numberInt":"3000"},"department":"5c51e3c644c13b0421bb3277"}
+{"_id":{"$oid":"5c51f00644c13b0421bb328a"},"type":"course","course_name":"Fundation Business","course_tag":"BUSI","course_num":{"$numberInt":"1100"},"course_level":{"$numberInt":"1000"},"department":"5c51e3c644c13b0421bb3278"}
+{"_id":{"$oid":"5c51f00644c13b0421bb328b"},"type":"course","course_name":"Canadian Bussiness","course_tag":"BUSI","course_num":{"$numberInt":"1200"},"course_level":{"$numberInt":"1000"},"department":"5c51e3c644c13b0421bb3278"}

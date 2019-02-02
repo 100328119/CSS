@@ -8,9 +8,9 @@ module.exports.getAllDepartment = (req, res, nex)=>{
 }
 
 module.exports.addNewDepartment = async (req, res, nex)=>{
-  const NewDepartment = new department(req.body);
-  await NewDepartment.save();
-  return res.status(200).json(NewDepartment);
+  const NewDepartment = new Department(req.body);
+  const save_department = await NewDepartment.save();
+  return res.status(200).json(save_department);
 }
 
 module.exports.updateDepartment = (req, res, nex)=>{

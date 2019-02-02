@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5c51e5d844c13b0421bb327c"},"typre":"building","building_name":"cedar","campus":"5c5111a244c13b0421bb326e"}
+{"_id":{"$oid":"5c51e5d844c13b0421bb327d"},"typre":"building","building_name":"richbuilding","campus":"5c5111a244c13b0421bb3270"}
+{"_id":{"$oid":"5c51e5d844c13b0421bb327e"},"typre":"building","building_name":"vanbuilding","campus":"5c5111a244c13b0421bb326f"}

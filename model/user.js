@@ -7,7 +7,8 @@ var Schema = mongoose.Schema;
 const UserSchema = new Schema({
   type:{
     type: String,
-    default:'user'},
+    default:'user'
+  },
   user_name:{
     type:String,
     required:true,
@@ -26,7 +27,9 @@ const UserSchema = new Schema({
     first_name:String,
     last_name:String
   },
-  admin:AdminSchema
+  admin:{
+    type:Object
+  }
 })
 
 UserSchema.pre('save', function (next){

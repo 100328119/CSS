@@ -11,7 +11,7 @@ const AdminSchema = new Schema({
     type:Number,
     default:''
   },
-  description:{
+  role:{
     type:String,
     default:''
   }

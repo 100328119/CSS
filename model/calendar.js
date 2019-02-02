@@ -1,4 +1,4 @@
-const mongoose = require('mongooose');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const {SectionSchema, Section} = require('./section');
 const {SemesterSchema, Semester} = require('./semester');
@@ -11,25 +11,22 @@ const CalendarSchema = new Schema({
     default: "calendar"
   },
   semester:{
-    type:SemesterSchema,
-    required:true,
-    default:{}
+    type:Object,
   },
-  owner:[{
-    type:String
-  }],
+  owner:{
+    type:Object,
+  },
   department:{
-    type:DepartmentSchema
+    type:Object
   },
-  section:[{
-    type:String
-  }],
+  sections:[],
   calendar_status:{
     type:String,
     default:"In Progress",
     required:true
   }
 })
+
 
 const Calendar = mongoose.model('calendar', CalendarSchema);
 module.exports = {CalendarSchema, Calendar};

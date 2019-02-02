@@ -1,0 +1,4 @@
+{"type":"room","room_num":1050,"equipment":{"num_seat":15,"projector":true,"pc":true},"floor":1,"building":"5c51e5d844c13b0421bb327c"}
+{"type":"room","room_num":1045,"equipment":{"num_seat":15,"projector":true,"pc":true},"floor":1,"building":"5c51e5d844c13b0421bb327c"}
+{"type":"room","room_num":100,"equipment":{"num_seat":15,"projector":true,"whiteboard":true},"floor":1,"building":"5c51e5d844c13b0421bb327d"}
+{"type":"room","room_num":200,"equipment":{"num_seat":15,"projector":true,"whiteboard":true},"floor":2,"building":"5c51e5d844c13b0421bb327e"}

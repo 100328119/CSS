@@ -11,7 +11,7 @@ const {UserSchema, User} = require('../model/user');
 // needs to be refactor..
 //login/logout/register
 secure.route('/register')
-  .post(UserController.Register);
+  .post(validateBody(schema.authSchema),UserController.Register);
 
 secure.route('/signin')
   .post(passport.authenticate('local',{session:false}),UserController.signIn);

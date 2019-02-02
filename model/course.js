@@ -19,11 +19,20 @@ const CourseSchema = new Schema({
     type:Number,
     required:true
   },
+  course_level:{
+    type:Number
+  },
   department:{
-    type:DepartmentSchema,
+    type:Object,
     required:true
-  }
+  },
+  prerequisites:[]
 })
 
-const Course = mongoose.model('course',CourseSchema);
+let Course;
+if (mongoose.models.course) {
+   Course = mongoose.model('course');
+} else {
+   Course = mongoose.model('course', CourseSchema);
+}
 module.exports = {CourseSchema, Course};
