@@ -6,6 +6,9 @@ const InstructorSchema = new Schema({
     type:String,
     default:"instructor"
   },
+  prof_id:{
+    type:Number
+  },
   full_name:{
     first_name: {
       type:String,
@@ -20,14 +23,13 @@ const InstructorSchema = new Schema({
     type:Object,
     required: true
   },
-  availbality:{
-    type: Boolean,
-    default: true
+  prof_type:{
+    type:String
   },
-  available_hour:{
-    type:Number,
-    default:0
-  }
+  max_course:{
+    type:Number
+  },
+  vetted_course:[],
 });
 
 let Instructor;
