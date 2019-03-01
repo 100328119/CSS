@@ -18,7 +18,7 @@ module.exports.EmbedBuilding = (rooms)=>{
          try{
            for(let i = 0; i < rooms.length; i++){
                let building_data = await Building.findOne({_id:rooms[i].building});
-               EmbedCampusPromise(building_data)
+               await EmbedCampusPromise(building_data)
                       .then(embedbuilding =>{
                         rooms[i].building = embedbuilding;
                       })
@@ -26,6 +26,7 @@ module.exports.EmbedBuilding = (rooms)=>{
            }
            resolve(rooms);
          }catch(err){
+           console.log(err);
            reject(err);
          }
        }

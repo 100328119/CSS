@@ -16,12 +16,22 @@ secure.route('/register')
 secure.route('/signin')
   .post(passport.authenticate('local',{session:false}),UserController.signIn);
 
+secure.route('/auth/access-token')
+  .get(passport.authenticate('jwt',{session:false}),UserController.TokenSignin);
+
 secure.route('/update/profile')
   .put(passport.authenticate('jwt',{session:false}),UserController.UpdateProfile);
 
 secure.route('/secret')
   .get(passport.authenticate('jwt',{session:false}),UserController.secret);
 
+secure.route('/users')
+  .get(passport.authenticate('jwt',{session:false}),UserController.getAllUsers);
+
+secure.route('/user/:_id')
+  .get(passport.authenticate('jwt',{session:false}), UserController.getUserByID)
+  .put(passport.authenticate('jwt',{session:false}), UserController.updateUserByID)
+  .delete(passport.authenticate('jwt',{session:false}), UserController.deleteUserByID)
 
 
 module.exports = secure;

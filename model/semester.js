@@ -7,7 +7,7 @@ const SemesterSchema = new Schema({
     default:'semester'
   },
   year:{
-    type:Number,
+    type:String,
     required:true
   },
   duration:{

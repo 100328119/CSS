@@ -1,11 +1,11 @@
 const {BuildingSchema, Building} = require('../model/building');
-const { EmbedCampus } = require('../helper/EmbedHelper/campusEmbed');
+const { EmbedCampusPromise,EmbedCampus } = require('../helper/EmbedHelper/campusEmbed');
 
 module.exports.getAllBuilding = (req, res, nex)=>{
   Building.find((err,buildings)=>{
-    if(err) return res.status(400).json(err);
-    EmbedCampus(buildings,(err, building_after)=>{
-      if(err) return res.status(400).json(err)
+    if(err) {return res.status(400).json(err);}
+    EmbedCampus(buildings,(error, building_after)=>{
+      if(error) return res.status(400).json(error)
       return res.status(200).json(building_after);
     })
   })

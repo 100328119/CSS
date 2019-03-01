@@ -74,6 +74,11 @@ module.exports.signIn = (req, res, nex)=>{
     .catch(err=>{ console.log(err);return res.status(400).json(err)})
 }
 
+module.exports.TokenSignin = async (req, res, nex)=>{
+  console.log(req.user);
+  module.exports.signIn(req, res, nex);
+}
+
 // intend to be refactor
 module.exports.UpdateProfile = (req, res, nex)=>{
     delete req.body.password;
@@ -85,6 +90,51 @@ module.exports.UpdateProfile = (req, res, nex)=>{
     })
 }
 
+module.exports.getAllUsers = (req, res, nex)=>{
+  User.find((err, users)=>{
+    if(err) return res.status(401).json(err);
+    EmbedAdmin(users)
+      .then(embed_users=>{
+        return res.status(200).json(embed_users);
+      })
+      .catch(err=>{
+        return res.status(400).json(err)
+      })
+  })
+}
+
+module.exports.getUserByID = (req, res, nex)=>{
+  User.findOne({_id:req.params._id}, (err, user)=>{
+    if(err) return res.status(400).json(err);
+    EmbedAdmin(user)
+      .then(embed_user=>{
+        return res.status(200).json(embed_user);
+      })
+      .catch(error=>{
+        return res.status(401).json(error);
+      })
+  })
+}
+
+module.exports.updateUserByID = (req, res, nex)=>{
+  User.findOneAndUpdate({_id:req.params._id, type:"user"}, req.body, {new: true}, (err, user)=>{
+    if(err) return res.status(400).json(err);
+    EmbedAdmin(user)
+      .then(embed_user=>{
+        return res.status(200).json(embed_user);
+      })
+      .catch(error=>{
+        return res.status(401).json(error);
+      })
+  })
+}
+
+module.exports.deleteUserByID = (req, res, nex)=>{
+  User.findOneAndDelete({_id:req.params._id, type:"user"}, req.body, {new:true}, (err, user)=>{
+    if(err) return res.status(400).json(err);
+    return res.send(200);
+  })
+}
 module.exports.secret = (req, res, nex)=>{
   res.send('secret works')
 }

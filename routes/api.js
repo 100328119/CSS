@@ -61,7 +61,7 @@ router.route('/department')
   .get(DepartmentController.getAllDepartment)
   .post(DepartmentController.addNewDepartment);
 
-router.route('/department/_id')
+router.route('/department/:_id')
   .put(DepartmentController.updateDepartment)
   .delete(DepartmentController.deleteDepartment);
 
@@ -93,6 +93,7 @@ router.route('/instructor')
   .post(InstructorController.addNewInstructor);
 
 router.route('/instructor/:_id')
+  .get(InstructorController.getInstructorById)
   .put(InstructorController.updateInstructor)
   .post(InstructorController.deleteInstructor);
 

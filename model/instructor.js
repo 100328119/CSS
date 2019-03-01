@@ -9,19 +9,20 @@ const InstructorSchema = new Schema({
   prof_id:{
     type:Number
   },
-  full_name:{
-    first_name: {
+  first_name: {
       type:String,
       required: true
-    },
-    last_name: {
+  },
+  last_name: {
       type: String,
       required: true
-    }
   },
   department:{
     type:Object,
     required: true
+  },
+  prof_id:{
+    type:String
   },
   prof_type:{
     type:String

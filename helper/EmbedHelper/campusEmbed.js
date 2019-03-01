@@ -4,10 +4,9 @@ const { Campus } = require('../../model/campus');
 module.exports.EmbedCampus = async (buildings,callback)=>{
   if(!Array.isArray(buildings)){
     Campus.findOne({_id:buildings.campus}, (err, campus)=>{
-      if(err)  callback(err,null);
-      console.log(campus);
+      if(err) callback(err,null);
       buildings.campus = campus;
-       callback(buildings)
+       callback(null,buildings)
     })
   }else{
     try{
@@ -15,7 +14,7 @@ module.exports.EmbedCampus = async (buildings,callback)=>{
           let campus_data = await Campus.findOne({_id:buildings[i].campus});
           buildings[i].campus = campus_data;
       }
-       callback(buildings);
+       callback(null,buildings);
     }catch(err){
        callback(err,null);
     }

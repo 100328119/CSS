@@ -13,9 +13,7 @@ const RoomSchema = new Schema({
     // unique:true,
     // dropDups:true
   },
-  equipment:{
-    type:Object
-  },
+  equipment:[],
   floor:{
     type:Number,
     default:0

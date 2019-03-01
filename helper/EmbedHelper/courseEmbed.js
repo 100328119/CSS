@@ -21,7 +21,6 @@ module.exports.EmbedCourse  = (calendar) =>{
         if(calendar.sections != undefined && Array.isArray(calendar.sections)){
           try{
             for(let i = 0; i < calendar.sections.length; i++){
-              console.log(calendar.sections[i].course);
               let course_data = await Course.findOne({_id:calendar.sections[i].course});
               calendar.sections[i].course = course_data;
             }

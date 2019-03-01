@@ -14,8 +14,8 @@ module.exports.EmbedAdmin = (users) =>{
           for(let i = 0; i < users.length; i++){
             let admin_data = await Admin.findOne({_id:users[i].admin});
             users[i].admin = admin_data
-            resolve(users);
           }
+          resolve(users);
         }catch(err){
           reject(err);
         }
