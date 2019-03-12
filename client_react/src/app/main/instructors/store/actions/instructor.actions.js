@@ -9,8 +9,12 @@ export const ADD_INSTRUCTOR = '[INSTRUCTOR APP] ADD INSTRUCTOR';
 export const EDIT_INSTRUCTOR = '[INSTRUCTOR APP] EDIT INSTRUCTOR';
 export const OPEN_NEW_VET_COURSE_DIALOG = '[INSTRUCTOR APP] OPEN NEW VET COURSE DIALOG';
 export const CLOSE_NEW_VET_COURSE_DIALOG = '[INSTRUCTOR APP] CLOSE NEW VET COURSE DIALOG';
+export const OPEN_EDIT_VET_COURSE_DIALOG = "[INSTRUCTOR APP] OPEN EDIT VET COURSE DIALOG";
+export const CLOSE_EDIT_VET_COURSE_DIALOG = '[INSTRUCTOR APP] CLOSE EDIT VET COURSE DIALOG';
 export const ADD_VET_COURSE = '[INSTRUCTOR APP] ADD VET COURSE';
+export const EDIT_VET_COURSE = '[INSTRUCTOR APP] EDIT VET COURSE';
 export const REMOVE_VET_COURSE = '[INSTRUCTOR APP] REMOVE VET COURSE';
+
 
 export function getInstructor(prof_id){
   const request = axios.get("http://localhost:4000/api/instructor/"+prof_id);
@@ -121,16 +125,15 @@ export function newInstructor(){
   }
 }
 
-export function openNewVetCourseDialog(department_id){
+export function openNewVetCourseDialog(){
   return (dispatch)=>{
     dispatch({
-      type:OPEN_NEW_VET_COURSE_DIALOG,
-      payload: department_id
+      type:OPEN_NEW_VET_COURSE_DIALOG
     })
   }
 }
 
-export function closeNewVetCouresDialog(){
+export function closeNewVetCourseDialog(){
   return (dispatch)=>{
     dispatch({
       type:CLOSE_NEW_VET_COURSE_DIALOG
@@ -138,28 +141,61 @@ export function closeNewVetCouresDialog(){
   }
 }
 
-export function addVetCourse(course){
-  return (dispatch,getState)=>{
-    let state = getState().instructor.data;
-    console.log("current state",state);
-    state.vetted_course.push(course);
-    console.log("after add course", state);
+export function openEditVetCourseDialog(data,index){
+  return (dispatch)=>{
     dispatch({
-      type:ADD_VET_COURSE,
-      payload: state
+      type:OPEN_EDIT_VET_COURSE_DIALOG,
+      payload: data,
+      index: index
     })
   }
 }
 
+export function closeEditVetCourseDialog(){
+  return (dispatch)=>{
+    dispatch({
+      type: CLOSE_EDIT_VET_COURSE_DIALOG
+    })
+  }
+}
+
+
+export function addVetCourse(data){
+  return (dispatch,getState)=>{
+    let state = getState().instructorsApp.instructor.data;
+    state.vetted_course.push(data.course);
+    dispatch({
+      type:ADD_VET_COURSE,
+      payload: state,
+      vetted_course_update: data.course
+    })
+  }
+}
+
+export function editVetCourse(data,index){
+  return (dispatch,getState)=>{
+    let state = getState().instructorsApp.instructor.data;
+    console.log("current state",state);
+    state.vetted_course[index] = data.course;
+    console.log("after add course", state);
+    dispatch({
+      type:EDIT_VET_COURSE,
+      payload: state,
+      vetted_course_update: data.course
+    })
+  }
+}
+
+
+
 export function removeVetCourse(course_index){
   return (dispatch,getState)=>{
-    let state = getState().instructor.data;
-    console.log("current state",state);
+    let state = getState().instructorsApp.instructor.data
     delete state.vetted_course[course_index];
-    console.log("after remove course", state);
     dispatch({
       type: REMOVE_VET_COURSE,
-      payload: state
+      payload: state,
+      vetted_course_update: course_index
     })
   }
 }

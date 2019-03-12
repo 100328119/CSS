@@ -1,16 +1,18 @@
+import {authRoles} from 'app/auth';
 import {FuseLoadable} from '@fuse';
 
-export const CoursesPageConfig = {
+export const CalendarsAppConfig = {
     settings: {
         layout: {
             config: {}
         }
     },
+    auth    : authRoles.user,
     routes  : [
         {
-            path     : '/courses',
+            path     : '/calendars/:id',
             component: FuseLoadable({
-                loader: () => import('./CoursesPage')
+                loader: () => import('./CalendarDetail')
             })
         }
     ]

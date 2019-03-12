@@ -14,6 +14,9 @@ import {InstructorsAppConfig} from "app/main/instructors/InstructorsAppConfig";
 import {SemesterConfig} from "app/main/semester/SemesterConfig";
 import {CoursesPageConfig} from "app/main/course/CoursesPageConfig";
 import {DepartmentsAppConfig} from "app/main/departments/DepartmentsAppConfig";
+import {CalendarsAppConfig} from 'app/main/calendars/CalendarsAppConfig';
+import {DashboardAppConfig} from 'app/main/dashboard/DashboardAppConfig';
+
 
 
 const routeConfigs = [
@@ -29,14 +32,16 @@ const routeConfigs = [
     InstructorsAppConfig,
     SemesterConfig,
     CoursesPageConfig,
-    DepartmentsAppConfig
+    DepartmentsAppConfig,
+    CalendarsAppConfig,
+    DashboardAppConfig
 ];
 
  const routes = [
     ...FuseUtils.generateRoutesFromConfigs(routeConfigs),
     {
         path     : '/',
-        component: () => <Redirect to="/example"/>
+        component: () => <Redirect to="/dashboard"/>
     }
 ];
 

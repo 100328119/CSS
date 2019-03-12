@@ -11,13 +11,13 @@ const CalendarSchema = new Schema({
     default: "calendar"
   },
   semester:{
-    type:String,
+    type:Object,
   },
   owner:{
-    type:String,
+    type:Object,
   },
   department:{
-    type:String
+    type:Object
   },
   sections:[],
   calendar_status:{

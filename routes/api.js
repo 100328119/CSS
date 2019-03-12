@@ -109,11 +109,11 @@ router.route('/section/:_id')
 //Calendar CRUD
 router.route('/calendar')
   .get(CalendarController.getAllCalendar)
-  .post(validateBody(schema.calendarSchema),CalendarController.addNewCalendar);
+  .post(CalendarController.addNewCalendar);
 
 router.route('/calendar/:_id')
    .get(CalendarController.getOneCalendar)
-   .put(validateBody(schema.calendarSchema),CalendarController.updateCalendar)
+   .put(CalendarController.updateCalendar)
    .delete(CalendarController.deleteCaleder);
 
 //calendar get by owner , department

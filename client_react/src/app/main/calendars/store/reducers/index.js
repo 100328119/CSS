@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import courses from './courses.reducers';
+import calendar from './calendar.reducer';
 
 const reducer = combineReducers({
-	courses
+    calendar
 });
 
 export default reducer;

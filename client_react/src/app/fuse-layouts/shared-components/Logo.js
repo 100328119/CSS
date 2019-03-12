@@ -23,8 +23,8 @@ function Logo({classes})
 {
     return (
         <div className={classNames(classes.root, "flex items-center")}>
-            <img className="logo-icon" src="assets/images/logos/fuse.svg" alt="logo"/>
-            <Typography className="text-16 ml-8 font-light logo-text">FUSE</Typography>
+            <img className="logo-icon" src="https://www.kpu.ca/sites/all/themes/kwantlen_v3/img/logo.svg" alt="logo"/>
+            <Typography className="text-16 ml-8 font-light logo-text">KPU</Typography>
             <div className={classNames(classes.reactBadge, "react-badge flex items-center ml-12 mr-8 py-4 px-8 rounded")}>
                 <img
                     className="react-logo"

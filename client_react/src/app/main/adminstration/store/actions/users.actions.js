@@ -8,7 +8,6 @@ export const SET_USERS_SEARCH_TEXT = '[ADMIN APP] SET USERS SEARCH TEXT';
 export function getUsers()
 {
       const request = axios.get('http://localhost:4000/secure/users');
-      console.log(request);
       return (dispatch) =>
           request.then((response) =>
               dispatch({

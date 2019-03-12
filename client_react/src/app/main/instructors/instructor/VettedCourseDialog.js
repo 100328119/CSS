@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
 import {FormHelperText, InputLabel, Select, MenuItem, TextField, Button, Dialog, DialogActions, DialogContent, Icon, IconButton, Typography, Toolbar, AppBar, Avatar} from '@material-ui/core';
+import {FuseChipSelect} from '@fuse';
 import {bindActionCreators} from 'redux';
-import * as Actions from './store/actions';
+import * as Actions from '../store/actions';
 import {connect} from 'react-redux';
 import _ from '@lodash';
 
 const newVettedCourseState = {
-            type: "course",
-            prerequisites: [],
-            _id: "",
-            course_name: "",
-            course_tag: "",
-            course_num: 0,
-            course_level: 0,
-            department: ""
+            department: {
+              department_name:null
+            },
+            course:{
+              course_num:"",
+              course_tag:"",
+              course_name:""
+            }
 };
 
 class VettedCourse extends Component {
@@ -35,7 +36,7 @@ class VettedCourse extends Component {
                 this.props.vetCourseDialog.data &&
                 !_.isEqual(this.props.vetCourseDialog.data, prevState) )
             {
-                this.setState({...this.props.vetCourseDialog.data});
+                this.setState({course:this.props.vetCourseDialog.data});
             }
 
             /**
@@ -55,21 +56,33 @@ class VettedCourse extends Component {
     };
 
     closeComposeDialog = () => {
-        this.props.vetCourseDialog.type === 'edit' ? this.props.closeEditVettedCourse() : this.props.closeNewVettedCourse();
+        this.props.vetCourseDialog.type === 'edit' ? this.props.closeEditVetCourseDialog() : this.props.closeNewVetCourseDialog();
     };
+
+    handleDepartmentChange = (value) => {
+        this.setState({department:value.value});
+        this.props.getCourseByDepartment(value.value._id);
+    };
+
+    handleCourseChange = (value) =>{
+      this.setState({course:value.value});
+    }
 
     canBeSubmitted()
     {
-        const {_id} = this.state;
         return (
-            _id.length > 0
+            this.state.department !== null && this.state.course !== null
         );
     }
 
     render()
     {
-        const {vetCourseDialog, addVetCourse, updateVetCourse, removeVetCourse} = this.props;
+        const {vetCourseDialog, addVetCourse, updateVetCourse, removeVetCourse,departments,editVetCourse} = this.props;
 
+        let course_by_department = this.props.course_by_department;
+        if(course_by_department === null){
+            course_by_department = [];
+        }
         return (
             <Dialog
                 classes={{
@@ -88,7 +101,6 @@ class VettedCourse extends Component {
                         </Typography>
                     </Toolbar>
                     <div className="flex flex-col items-center justify-center pb-24">
-                        <Avatar className="w-96 h-96" alt="instructor avatar" src={this.state.avatar}/>
                         {vetCourseDialog.type === 'edit' && (
                             <Typography variant="h6" color="inherit" className="pt-8">
                                 {this.state.name}
@@ -98,40 +110,46 @@ class VettedCourse extends Component {
                 </AppBar>
 
                 <DialogContent classes={{root: "p-24"}}>
-                    <div className="flex">
-                        <div className="min-w-48 pt-20">
-                            <Icon color="action">account_circle</Icon>
-                        </div>
 
-                        <TextField
-                            className="mb-24"
-                            label="Professor ID"
-                            autoFocus
-                            id="prof_id"
-                            name="prof_id"
-                            value={this.state.prof_id}
-                            onChange={this.handleChange}
-                            variant="outlined"
-                            required
-                            type="number"
-                            fullWidth
+                        <FuseChipSelect
+                            className="mt-8 mb-24"
+                            value={{label:this.state.department.department_name,value:this.state.department}}
+                            options={departments.map(department=>({
+                              value:department,
+                              label:department.department_name
+                            }))}
+                            name="department"
+                            onChange={(value)=>this.handleDepartmentChange(value)}
+                            placeholder="Select department"
+                            disable="true"
+                            textFieldProps={{
+                                label          : 'Department',
+                                InputLabelProps: {
+                                    shrink: true
+                                },
+                                variant        : 'outlined'
+                            }}
                         />
-                    </div>
-                    <div className="flex">
-                        <div className="min-w-48 pt-20">
-                        </div>
-                        <TextField
-                            className="mb-24"
-                            label="First Name"
-                            id="first_name"
-                            name="first_name"
-                            value={this.state.first_name}
-                            onChange={this.handleChange}
-                            variant="outlined"
-                            required
-                            fullWidth
+
+                        <FuseChipSelect
+                            className="mt-8 mb-24"
+                            value={{label:this.state.course.course_tag+" "+this.state.course.course_num+" "+this.state.course.course_name,value:this.course}}
+                            options={course_by_department.map(course=>({
+                              value:course,
+                              label:course.course_tag+" "+course.course_num+" "+course.course_name
+                            }))}
+                            name="Course"
+                            onChange={(value)=>this.handleCourseChange(value)}
+                            placeholder="Select Course"
+                            disable="true"
+                            textFieldProps={{
+                                label          : 'Course',
+                                InputLabelProps: {
+                                    shrink: true
+                                },
+                                variant        : 'outlined'
+                            }}
                         />
-                    </div>
                 </DialogContent>
 
                 {vetCourseDialog.type === 'new' ? (
@@ -154,7 +172,7 @@ class VettedCourse extends Component {
                             variant="contained"
                             color="primary"
                             onClick={() => {
-                                updateVetCourse(this.state);
+                                editVetCourse(this.state, vetCourseDialog.props.index);
                                 this.closeComposeDialog();
                             }}
                             disabled={!this.canBeSubmitted()}
@@ -163,7 +181,7 @@ class VettedCourse extends Component {
                         </Button>
                         <IconButton
                             onClick={() => {
-                                removeVetCourse(this.state.id);
+                                // removeVetCourse(this.state.id);
                                 this.closeComposeDialog();
                             }}
                         >
@@ -180,14 +198,20 @@ class VettedCourse extends Component {
 function mapDispatchToProps(dispatch)
 {
     return bindActionCreators({
-
+      closeNewVetCourseDialog: Actions.closeNewVetCourseDialog,
+      closeEditVetCourseDialog: Actions.closeEditVetCourseDialog,
+      editVetCourse: Actions.editVetCourse,
+      addVetCourse: Actions.addVetCourse,
+      getCourseByDepartment: Actions.getCourseByDepartment
     }, dispatch);
 }
 
-function mapStateToProps({instructorsApp})
+function mapStateToProps({instructorsApp, DepartmentApp})
 {
     return {
-
+      departments: DepartmentApp.departments.entities,
+      vetCourseDialog: instructorsApp.instructor.vetCourseDialog,
+      course_by_department: instructorsApp.instructor.course_by_department
     }
 }
 

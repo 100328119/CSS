@@ -4,11 +4,12 @@ const initialState = {
   data: null,
   department_data: null,
   course_by_department: null,
+  vetted_course_update: null,
   vetCourseDialog:{
     type:"new",
     props:{
       open:false,
-      department_id:null
+      index:null
     },
     data:null
   }
@@ -59,7 +60,7 @@ const instructorReducer = function (state = initialState, action){
           type: 'new',
           props:{
             open:true,
-            department_id:action.payload
+            index:null
           },
           data: null
         }
@@ -71,7 +72,32 @@ const instructorReducer = function (state = initialState, action){
         ...state,
         vetCourseDialog:{
           type:'new',
-          props:{open:false,department_id:null},
+          props:{open:false,index:null},
+          data: null
+        }
+      }
+    }
+    case Actions.OPEN_EDIT_VET_COURSE_DIALOG:
+    {
+      return{
+        ...state,
+        vetCourseDialog:{
+          type: 'edit',
+          props:{
+            open:true,
+            index: action.index
+          },
+          data: action.payload
+        }
+      }
+    }
+    case Actions.CLOSE_EDIT_VET_COURSE_DIALOG:
+    {
+      return{
+        ...state,
+        vetCourseDialog:{
+          type:'edit',
+          props:{open:false,index:null},
           data: null
         }
       }
@@ -80,14 +106,24 @@ const instructorReducer = function (state = initialState, action){
     {
       return{
         ...state,
-        data: action.payload
+        data: action.payload,
+        vetted_course_update:action.vetted_course_update
+      }
+    }
+    case Actions.EDIT_VET_COURSE:
+    {
+      return{
+        ...state,
+        data: action.payload,
+        vetted_course_update:action.vetted_course_update
       }
     }
     case Actions.REMOVE_VET_COURSE:
     {
         return{
           ...state,
-          data: action.payload
+          data: action.payload,
+          vetted_course_update:action.vetted_course_update
         }
     }
     default:

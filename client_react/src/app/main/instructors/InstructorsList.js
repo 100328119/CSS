@@ -26,7 +26,6 @@ class InstructorsList extends Component {
     {
         const { instructors, searchText, openEditInstructorDialog,removeInstructor} = this.props;
         const data = this.getFilteredArray(instructors, searchText);
-
         if ( !data && data.length === 0 )
         {
             return (

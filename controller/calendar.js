@@ -12,7 +12,7 @@ module.exports.getAllCalendar = (req, res, nex)=>{
 }
 
 module.exports.addNewCalendar = async (req, res, nex)=>{
-  const NewCalendar = new Calendar(req.value.body);
+  const NewCalendar = new Calendar(req.body);
   let Saved_Calendar = await NewCalendar.save();
   EmbedData_Calendar(Saved_Calendar,res);
 }
@@ -25,7 +25,7 @@ module.exports.getOneCalendar = (req, res, nex)=>{
 }
 
 module.exports.updateCalendar = (req, res, nex)=>{
-  let cal_data = req.value.body;
+  let cal_data = req.body;
   console.log(cal_data);
   Calendar.findOneAndUpdate({_id:req.params._id}, cal_data, {new:true}, (err, calendar)=>{
     if(err) return res.status(400).json(err);

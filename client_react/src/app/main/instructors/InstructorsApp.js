@@ -38,7 +38,7 @@ class InstructorsApp extends Component {
 
     render()
     {
-        const {classes, openNewInstructorDialog} = this.props;
+        const {classes} = this.props;
 
         return (
             <React.Fragment>
@@ -69,7 +69,6 @@ function mapDispatchToProps(dispatch)
 {
     return bindActionCreators({
         getInstructors         : Actions.getInstructors,
-        openNewInstructorDialog: Actions.openNewInstructorDialog
     }, dispatch);
 }
 

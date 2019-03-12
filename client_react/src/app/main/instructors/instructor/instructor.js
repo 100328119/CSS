@@ -11,8 +11,10 @@ import ReactTable from "react-table";
 import withReducer from 'app/store/withReducer';
 
 import * as Actions from '../store/actions';
+import * as DepartActions from '../../departments/store/actions';
 import reducer from '../store/reducers';
 import axios from 'axios';
+import VettedCourseDialog from './VettedCourseDialog';
 
 const styles = theme => ({
     productImageFeaturedStar: {
@@ -77,6 +79,9 @@ class Instructor extends Component {
         {
             this.updateFormState();
         }
+        if(!_.isEqual(this.props.vetted_course_update, prevProps.vetted_course_update) ){
+          this.updateFormState();
+        }
     }
 
 
@@ -87,8 +92,7 @@ class Instructor extends Component {
     updateInstructorState = () => {
         const params = this.props.match.params;
         const instructor_id = params.id;
-        console.log(params);
-        this.props.getDepartment();
+        this.props.getDepartmentsOrignal();
         if ( instructor_id === 'new' )
         {
             this.props.newInstructor();
@@ -120,14 +124,13 @@ class Instructor extends Component {
     canBeSubmitted()
     {
         const {prof_id} = this.state.form;
-        if(this.state.new_instructor === "new"){
+        if(this.state.new_instructor === true){
           return (
               prof_id.length > 0 &&
               !_.isEqual(this.props.instructor, this.state.form)
           );
         }else{
           return (
-              prof_id.length > 0 &&
               !_.isEqual(this.props.instructor, this.state.form)
           );
         }
@@ -135,7 +138,7 @@ class Instructor extends Component {
 
     render()
     {
-        const {classes,addInstructor,editInstructor} = this.props;
+        const {classes,addInstructor,editInstructor,openNewVetCourseDialog,removeVetCourse,openEditVetCourseDialog} = this.props;
         let department = [];
         if(this.props.department != null){
           department = this.props.department;
@@ -308,6 +311,7 @@ class Instructor extends Component {
                           </div>
                         )}
                         {tabValue === 1 && (
+                          <>
                           <FuseAnimate animation="transition.slideUpIn" delay={300}>
                               <ReactTable
                                   className="-striped -highlight border-0"
@@ -317,7 +321,8 @@ class Instructor extends Component {
                                           onClick  : (e, handleOriginal) => {
                                               if ( rowInfo )
                                               {
-                                                  // this.HandleRowClick(rowInfo.original._id);
+                                                  // console.log(rowInfo);
+                                                  // openEditVetCourseDialog(rowInfo.original,rowInfo.index);
                                               }
                                           }
                                       }
@@ -354,7 +359,7 @@ class Instructor extends Component {
                                                   <IconButton
                                                       onClick={(ev) => {
                                                           ev.stopPropagation();
-                                                          // removeInstructor(row.original.id);
+                                                          removeVetCourse(row.index);
                                                       }}
                                                   >
                                                       <Icon>delete</Icon>
@@ -362,7 +367,7 @@ class Instructor extends Component {
                                                   <IconButton
                                                       onClick={(ev) => {
                                                           ev.stopPropagation();
-                                                          // removeInstructor(row.original.id);
+                                                          openNewVetCourseDialog();
                                                       }}
                                                   >
                                                       <Icon>add</Icon>
@@ -375,6 +380,8 @@ class Instructor extends Component {
                                   noDataText="No instructors found"
                               />
                             </FuseAnimate>
+                            <VettedCourseDialog/>
+                            </>
                         )}
                         {tabValue === 2 && (
                             <div>
@@ -402,19 +409,22 @@ function mapDispatchToProps(dispatch)
 {
     return bindActionCreators({
       getInstructor : Actions.getInstructor,
-      getDepartment: Actions.getDepartment,
-      getCourseByDepartment: Actions.getCourseByDepartment,
+      getDepartmentsOrignal: DepartActions.getDepartmentsOrignal,
+      openNewVetCourseDialog: Actions.openNewVetCourseDialog,
+      openEditVetCourseDialog: Actions.openEditVetCourseDialog,
       newInstructor: Actions.newInstructor,
       addInstructor: Actions.addInstructor,
-      editInstructor: Actions.editInstructor
+      editInstructor: Actions.editInstructor,
+      removeVetCourse: Actions.removeVetCourse
     }, dispatch);
 }
 
-function mapStateToProps({instructorsApp})
+function mapStateToProps({instructorsApp, DepartmentApp})
 {
     return {
       instructor: instructorsApp.instructor.data,
-      department: instructorsApp.instructor.department_data,
+      department: DepartmentApp.departments.entities,
+      vetted_course_update: instructorsApp.instructor.vetted_course_update,
       course_by_department: instructorsApp.instructor.course_by_department
     }
 }

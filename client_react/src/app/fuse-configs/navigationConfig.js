@@ -7,11 +7,12 @@ const navigationConfig = [
         'icon'    : 'apps',
         'children': [
             {
-                'id'   : 'example-component',
-                'title': 'example',
+                'id'   : 'dashboard-component',
+                'title': 'dashboard',
                 'type' : 'item',
                 'icon' : 'today',
-                'url'  : '/example'
+                 auth  : authRoles.user,
+                'url'  : '/dashboard/boards'
             },
             {
                 'id'   : 'Administration-component',
@@ -92,6 +93,13 @@ const navigationConfig = [
               'url'  : '/new/calendar'
             },
             {
+              'id'   : 'NewCalendars-component',
+              'title': 'Create Calendar Production',
+              'type' : 'item',
+              'icon' : 'today',
+              'url'  : '/calendars/new'
+            },
+            {
               'id'   : 'login-component',
               'title': 'login',
               'type' : 'item',
@@ -106,6 +114,13 @@ const navigationConfig = [
                 auth   : authRoles.user,
                 'url'  : '/logout',
                 'icon' : 'exit_to_app'
+            },
+            {
+                'id'   : 'example-component',
+                'title': 'example',
+                'type' : 'item',
+                'icon' : 'today',
+                'url'  : '/example'
             },
             {
                 'id'      : 'e-commerce',

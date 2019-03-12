@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import courses from './courses.reducers';
+import boards from './boards.reducer';
 
 const reducer = combineReducers({
-	courses
+    boards,
 });
 
 export default reducer;

@@ -23,6 +23,13 @@ const departmentsReducer = function (state = initialState, action) {
                 entities   : _.keyBy(action.payload, '_id')
             };
         }
+        case Actions.GET_DEPARTMENTS_ORIGNAL:
+        {
+            return {
+                ...state,
+                entities   : action.payload
+            };
+        }
         case Actions.SET_SEARCH_TEXT:
         {
             return {

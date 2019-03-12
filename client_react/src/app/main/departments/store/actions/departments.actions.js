@@ -2,6 +2,7 @@ import axios from 'axios';
 import {getUserData} from 'app/main/departments/store/actions/user.actions';
 
 export const GET_DEPARTMENTS = '[DEPARTMENTS APP] GET DEPARTMENTS';
+export const GET_DEPARTMENTS_ORIGNAL = '[DEPARTMENT APP] GET DEPARTMENT ORIGNAL';
 export const SET_SEARCH_TEXT = '[DEPARTMENTS APP] SET SEARCH TEXT';
 export const OPEN_NEW_DEPARTMENT_DIALOG = '[DEPARTMENTS APP] OPEN NEW DEPARTMENT DIALOG';
 export const CLOSE_NEW_DEPARTMENT_DIALOG = '[DEPARTMENTS APP] CLOSE NEW DEPARTMENT DIALOG';
@@ -19,6 +20,19 @@ export function getDepartments()
         request.then((response) =>{
             dispatch({
                 type   : GET_DEPARTMENTS,
+                payload: response.data
+            })
+        });
+}
+
+export function getDepartmentsOrignal()
+{
+    const request = axios.get("http://localhost:4000/api/department/");
+
+    return (dispatch) =>
+        request.then((response) =>{
+            dispatch({
+                type   : GET_DEPARTMENTS_ORIGNAL,
                 payload: response.data
             })
         });
