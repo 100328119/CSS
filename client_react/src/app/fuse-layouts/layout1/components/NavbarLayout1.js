@@ -29,9 +29,12 @@ const NavbarLayout1 = ({classes, navigation, className}) => {
                 elevation={0}
                 className="flex flex-row items-center flex-shrink h-64 min-h-64"
             >
-                <div className="flex flex-1 pr-8 pl-16">
+            <div
+              style={{ backgroundColor: "white" }}
+              className="flex flex-1 pr-8 pl-16"
+            >
                     <Logo/>
-                </div>
+              </div>
 
                 <Hidden mdDown>
                     <NavbarFoldedToggleButton/>
@@ -56,5 +59,3 @@ const NavbarLayout1 = ({classes, navigation, className}) => {
 };
 
 export default withStyles(styles, {withTheme: true})(NavbarLayout1);
-
-

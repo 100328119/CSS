@@ -31,27 +31,57 @@ class Login extends Component {
         const {tabValue} = this.state;
 
         return (
-            <div className={classNames(classes.root, "flex flex-col flex-1 flex-no-shrink p-24 md:flex-row md:p-0")}>
+          <div
+            className={classNames(
+              classes.root,
+              "flex flex-col flex-1 flex-no-shrink p-24 md:flex-row md:p-0"
+            )}
+          >
+            <div
+              style={{
+                backgroundImage: `url("http://www.kpu.ca/sites/all/themes/kwantlen_v3/img/kpu-surrey.jpg")`,
+                position: "relative"
+              }}
+              className="flex flex-col flex-no-grow items-center text-white p-16 text-center md:p-128 md:items-start md:flex-no-shrink md:flex-1 md:text-left"
+            >
+              <div
+                style={{
+                  backgroundColor: `rgba(150, 40, 27, 0.7)`,
+                  position: "absolute",
+                  width: `100%`,
+                  height: `100%`,
+                  top: 0,
+                  left: 0
+                }}
+              >
+                {" "}
+              </div>
+              <FuseAnimate animation="transition.expandIn">
+                <img
+                  className="w-128 mb-32"
+                  src="https://www.kpu.ca/sites/all/themes/kwantlen_v3/img/logo.svg"
+                  alt="logo"
+                />
+              </FuseAnimate>
 
-                <div className="flex flex-col flex-no-grow items-center text-white p-16 text-center md:p-128 md:items-start md:flex-no-shrink md:flex-1 md:text-left">
+              <FuseAnimate animation="transition.slideUpIn" delay={300}>
+                <Typography variant="h3" color="inherit" className="font-light">
+                  Welcome to KPU Course Scheduling System!
+                </Typography>
+              </FuseAnimate>
 
-                    <FuseAnimate animation="transition.expandIn">
-                        <img className="w-128 mb-32" src="assets/images/logos/fuse.svg" alt="logo"/>
-                    </FuseAnimate>
-
-                    <FuseAnimate animation="transition.slideUpIn" delay={300}>
-                        <Typography variant="h3" color="inherit" className="font-light">
-                            Welcome to the CSS!
-                        </Typography>
-                    </FuseAnimate>
-
-                    <FuseAnimate delay={400}>
-                        <Typography variant="subtitle1" color="inherit" className="max-w-512 mt-16">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat, vel convallis elit fermentum pellentesque. Sed mollis velit
-                            facilisis facilisis.
-                        </Typography>
-                    </FuseAnimate>
-                </div>
+              {/* <FuseAnimate delay={400}>
+                <Typography
+                  variant="subtitle1"
+                  color="inherit"
+                  className="max-w-512 mt-16 font-light"
+                >
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+                  ullamcorper nisl erat, vel convallis elit fermentum pellentesque.
+                  Sed mollis velit facilisis facilisis.
+                </Typography>
+              </FuseAnimate> */}
+            </div>
 
                 <FuseAnimate animation={{translateX: [0, '100%']}}>
 
