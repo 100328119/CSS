@@ -6,7 +6,10 @@ const { EmbedSemester } = require('../helper/EmbedHelper/semesterEmbed');
 
 module.exports.getAllCalendar = (req, res, nex)=>{
   Calendar.find((err, calendar)=>{
-     if(err) return res.status(400).json(err);
+     if(err){
+       console.log(err);
+       return res.status(400).json(err);
+     }
      EmbedData_Calendar(calendar,res);
   })
 }
@@ -26,14 +29,46 @@ module.exports.getOneCalendar = (req, res, nex)=>{
 
 module.exports.updateCalendar = (req, res, nex)=>{
   let cal_data = req.body;
-  console.log(cal_data);
   Calendar.findOneAndUpdate({_id:req.params._id}, cal_data, {new:true}, (err, calendar)=>{
-    if(err) return res.status(400).json(err);
+    if(err) {
+      console.log(err);
+      return res.status(400).json(err);
+    }
     EmbedData_Calendar(calendar,res);
   })
 }
 
-module.exports.deleteCaleder = (req, res, nex)=>{
+module.exports.addNewEvent = (req, res, nex)=>{
+  Calendar.findOneAndUpdate({_id:req.params._id}, {$push: { "sections": req.body }}, (err, calendar)=>{
+    if(err) {
+      console.log(err);
+      return res.status(400).json(err);
+    }
+    EmbedData_Calendar(calendar,res);
+  })
+}
+module.exports.updateEvent = (req, res, nex)=>{
+  Calendar.findOneAndUpdate({_id:req.params._id,'sections._id':req.params.event_id }, {$set: {'sections.$':req.body}},{new:true}, (err, calendar)=>{
+    if(err) {
+      console.log(err);
+      return res.status(400).json(err);
+    }
+    console.log(calendar);
+    EmbedData_Calendar(calendar,res);
+  })
+}
+
+module.exports.removeEvent = (req, res, nex)=>{
+  Calendar.findOneAndUpdate({_id:req.params._id}, {$pull: { "sections" : { _id: req.params.event_id }}}, (err, calendar)=>{
+    if(err) {
+      console.log(err);
+      return res.status(400).json(err);
+    }
+    EmbedData_Calendar(calendar,res);
+  })
+}
+
+module.exports.deleteCalender = (req, res, nex)=>{
   Calendar.findOneAndDelete({_id:req.params._id, type:"calendar"}, (err, calendar)=>{
     if(err) return res.status(400).json(err)
     return res.status(200);

@@ -114,7 +114,12 @@ router.route('/calendar')
 router.route('/calendar/:_id')
    .get(CalendarController.getOneCalendar)
    .put(CalendarController.updateCalendar)
-   .delete(CalendarController.deleteCaleder);
+   .post(CalendarController.addNewEvent)
+   .delete(CalendarController.deleteCalender);
+
+router.route('/calendar/:_id/:event_id')
+  .put(CalendarController.updateEvent)
+  .delete(CalendarController.removeEvent);
 
 //calendar get by owner , department
 router.route('/calendar/owner/:_id')

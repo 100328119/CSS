@@ -115,7 +115,7 @@ class CalendarHeader extends Toolbar {
                                 <IconButton
                                     aria-label={name}
                                     onClick={() => this.props.onView(name)}
-                                    disabled={view === name}
+                                    // disabled={view === name}
                                 >
                                     <Icon>{viewNamesObj[name].icon}</Icon>
                                 </IconButton>
@@ -129,7 +129,7 @@ class CalendarHeader extends Toolbar {
 
     render()
     {
-        const {classes, mainThemeDark, label, date} = this.props;
+        const {classes, mainThemeDark, label, date, calender} = this.props;
 
         return (
             <MuiThemeProvider theme={mainThemeDark}>
@@ -144,7 +144,7 @@ class CalendarHeader extends Toolbar {
                                     <Icon className="text-32 mx-12">today</Icon>
                                 </FuseAnimate>
                                 <FuseAnimate animation="transition.slideLeftIn" delay={300}>
-                                    <Typography variant="h6">Calendar</Typography>
+                                    <Typography variant="h6">{calender.semester?calender.semester.season + " "+calender.semester.year + " "+calender.department.department_name: "Calendar"}</Typography>
                                 </FuseAnimate>
                             </div>
                             <div className="flex items-center">
@@ -182,12 +182,12 @@ class CalendarHeader extends Toolbar {
 }
 
 
-function mapStateToProps({fuse})
+function mapStateToProps({fuse,calendarApp})
 {
     return {
-        mainThemeDark: fuse.settings.mainThemeDark
+        mainThemeDark: fuse.settings.mainThemeDark,
+        calender: calendarApp.events.calendar
     }
 }
 
 export default withStyles(styles, {withTheme: true})(connect(mapStateToProps)(CalendarHeader));
-

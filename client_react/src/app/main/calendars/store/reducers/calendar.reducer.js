@@ -2,7 +2,11 @@ import * as Actions from '../actions';
 
 const initialState = {
   calendar_data: null,
-  calendars_data: null
+  calendars_data: null,
+  calendar_created:{
+    created:false,
+    calendarId:null
+  }
 }
 
 const calendarReducer = function ( state = initialState, action){
@@ -19,7 +23,10 @@ const calendarReducer = function ( state = initialState, action){
     {
       return {
         ...state,
-        calendar_data: action.payload
+        calendar_created: {
+          created:true,
+          calendarId:action.payload._id
+        }
       }
     }
     case Actions.GET_CALENDAR:

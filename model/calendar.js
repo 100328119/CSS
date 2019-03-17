@@ -1,9 +1,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const {SectionSchema, Section} = require('./section');
+// const {SectionSchema, Section} = require('./section');
 const {SemesterSchema, Semester} = require('./semester');
 const {DepartmentSchema, Department} = require('./department');
 const {UserSchema, User} = require('./user');
+
+const SectionSchema = new Schema({
+  title:String,
+  start:String,
+  end:String,
+  allDay:Boolean,
+  desc:String
+});
 
 const CalendarSchema = new Schema({
   type:{
@@ -19,7 +27,7 @@ const CalendarSchema = new Schema({
   department:{
     type:Object
   },
-  sections:[],
+  sections:[SectionSchema],
   calendar_status:{
     type:String,
     default:"In Progress",

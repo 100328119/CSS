@@ -165,7 +165,9 @@ class CalendarApp extends Component {
 
     componentDidMount()
     {
-        this.props.getEvents();
+        const params = this.props.match.params;
+        const calendarId = params.id;
+        this.props.getEvents(calendarId);
     }
 
     moveEvent = ({event, start, end}) => {
@@ -187,7 +189,11 @@ class CalendarApp extends Component {
 
     render()
     {
-        const {classes, events, openNewEventDialog, openEditEventDialog} = this.props;
+        const {classes, calendar,openNewEventDialog, openEditEventDialog} = this.props;
+        let events = [];
+        if(calendar !== null){
+          events = calendar.sections;
+        }
         return (
             <div className={classNames(classes.root, "flex flex-col flex-auto relative")}>
                 {this.toolbarProps && (
@@ -201,7 +207,7 @@ class CalendarApp extends Component {
                     onEventDrop={this.moveEvent}
                     resizable
                     onEventResize={this.resizeEvent}
-                    defaultView={BigCalendar.Views.MONTH}
+                    defaultView={BigCalendar.Views.WEEK}
                     defaultDate={new Date(2018, 3, 1)}
                     startAccessor="start"
                     endAccessor="end"
@@ -255,7 +261,7 @@ function mapDispatchToProps(dispatch)
 function mapStateToProps({calendarApp})
 {
     return {
-        events: calendarApp.events.entities
+        calendar: calendarApp.events.calendar
     }
 }
 

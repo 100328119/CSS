@@ -119,6 +119,7 @@ class CalendarDetail extends Component {
 
     render()
     {
+        console.log(this.props);
         const {classes,saveCalendar,updateCalendar,current_user} = this.props;
         const {tabValue, form} = this.state;
         let departments = [];

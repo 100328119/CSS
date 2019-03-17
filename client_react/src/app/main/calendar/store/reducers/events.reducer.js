@@ -1,6 +1,7 @@
 import * as Actions from '../actions';
 
 const initialState = {
+    calendar :null,
     entities   : [],
     eventDialog: {
         type : 'new',
@@ -16,17 +17,17 @@ const eventsReducer = function (state = initialState, action) {
     {
         case Actions.GET_EVENTS:
         {
-            const entities = action.payload.map((event) => (
+            const entities = action.payload.sections.map((event) => (
                 {
                     ...event,
                     start: new Date(event.start),
                     end  : new Date(event.end)
                 }
             ));
-
+            action.payload.sections = entities;
             return {
                 ...state,
-                entities
+                calendar:action.payload
             };
         }
         case Actions.OPEN_NEW_EVENT_DIALOG:

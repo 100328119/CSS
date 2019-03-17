@@ -173,7 +173,7 @@ class Boards extends Component {
 
                                         </div>
                                         <Link
-                                            to={`/calendars/${board._id}`}
+                                            to={`/calendar/${board._id}`}
                                             className={classNames(classes.board, "flex flex-col items-center justify-center w-full h-full rounded py-24")}
                                             role="button"
 

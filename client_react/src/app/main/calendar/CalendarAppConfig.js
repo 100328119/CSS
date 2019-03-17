@@ -1,4 +1,3 @@
-import {authRoles} from 'app/auth';
 import {FuseLoadable} from '@fuse';
 
 export const CalendarAppConfig = {
@@ -7,18 +6,11 @@ export const CalendarAppConfig = {
             config: {}
         }
     },
-    auth    : authRoles.user,
     routes  : [
         {
-            path     : '/calendar',
+            path     : '/calendar/:id',
             component: FuseLoadable({
                 loader: () => import('./CalendarApp')
-            })
-        },
-        {
-            path     : '/new/calendar',
-            component: FuseLoadable({
-                loader: () => import('./NewCalendar')
             })
         }
     ]
