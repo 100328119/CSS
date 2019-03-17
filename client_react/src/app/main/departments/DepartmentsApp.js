@@ -68,7 +68,7 @@ class DepartmentsApp extends Component {
                         className={classes.addButton}
                         onClick={openNewDepartmentDialog}
                     >
-                        <Icon>person_add</Icon>
+                        <Icon>add</Icon>
                     </Fab>
                 </FuseAnimate>
                 <DepartmentDialog/>

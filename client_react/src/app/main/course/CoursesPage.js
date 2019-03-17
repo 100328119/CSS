@@ -12,7 +12,7 @@ import reducer from './store/reducers';
 import CourseDialog from './CourseDialog';
 
 const styles = theme => ({
-  
+
 	addButton: {
 		position: 'absolute',
 		right   : 12,
@@ -88,7 +88,7 @@ class CoursesPage extends Component {
 											<Typography className="hidden sm:flex" variant="h6">Courses</Typography>
 									</FuseAnimate>
 							</div>
-	
+
 							<div className="flex flex-1 items-center justify-center px-12">
 							<Select
 								className="mb-24"
@@ -110,12 +110,12 @@ class CoursesPage extends Component {
             }
             content={
 							<div className="w-full flex flex-col">
-							
+
 								<div className = "mt-12" >
-									<div className = "w-full max-w-full mx-auto" >
-									<FuseAnimateGroup enter = {{animation: "transition.slideUpBigIn"}} className = "flex items-center justify-center flex-wrap" >
+									<div className = "w-full  mx-auto" >
+									<FuseAnimateGroup enter = {{animation: "transition.slideUpBigIn"}} className = "flex items-center justify-center " >
 									<div className = "w-full max-w-320 p-12" >
-									
+
 									{/* <Card className = "relative" >
 									<div className = "pt-48 pb-24 text-center" >
 									<Typography variant = "subtitle1" color = "inherit" className = "text-20 font-medium" >
@@ -137,11 +137,11 @@ class CoursesPage extends Component {
 									</div>
 									</CardContent>
 									</Card> */}
-									
-									<List className="border border-black rounded h-512">
+
+									<List className="border border-black rounded h-512 overflow-y-scroll ">
 										<FuseScrollbars className="flex-grow overflow-x-auto">
 										<ListItem>
-      				    		<ListItemText primary="Year 1" />
+      				    		<ListItemText primary= "Year 1" />
       	 						</ListItem>
 										 {
 										Object.entries(courses).map(course => {
@@ -157,10 +157,9 @@ class CoursesPage extends Component {
 									</FuseScrollbars>
 									</List>
 									</div>
-									
-		
-									<div className = "w-full max-w-320 p-12" >
-									<List className="border border-black rounded h-512" subheader>
+
+									<div className = "w-full max-w-320 p-12 relative" >
+									<List className="border border-black rounded h-512 overflow-y-scroll">
 										<FuseScrollbars className="flex-grow overflow-x-auto">
 										<ListItem>
       				    		<ListItemText primary="Year 2" />
@@ -179,9 +178,9 @@ class CoursesPage extends Component {
 									</FuseScrollbars>
 									</List>
 									</div>
-		
+
 									<div className = "w-full max-w-320 p-12" >
-									<List className="border border-black rounded h-512">
+									<List className="border border-black rounded h-512 overflow-y-scroll ">
 										<FuseScrollbars className="flex-grow overflow-x-auto">
 										<ListItem>
       				    		<ListItemText primary="Year 3" />
@@ -200,9 +199,9 @@ class CoursesPage extends Component {
 									</FuseScrollbars>
 									</List>
 									</div>
-		
+
 									<div className = "w-full max-w-320 p-12" >
-									<List className="border border-black rounded h-512">
+									<List className="border border-black rounded h-512 overflow-y-scroll relative">
 										<FuseScrollbars className="flex-grow overflow-x-auto">
 										<ListItem>
       				    		<ListItemText primary="Year 4" />
@@ -231,17 +230,14 @@ class CoursesPage extends Component {
 														className={classes.addButton}
 														onClick={openNewCourseDialog}
 												>
-												<Icon>person_add</Icon>
+												<Icon>add</Icon>
 												</Fab>
 										</FuseAnimate>
 							<CourseDialog/>
-							
+
 							</div>
             }
             innerScroll
-       
-				
-				
 					/>
     );
 	}
@@ -262,7 +258,7 @@ function mapStateToProps({coursesPage})
     return {
 				courses			:	coursesPage.courses.entities,
 				departments	:	coursesPage.courses.departments
-				
+
     }
 }
 
