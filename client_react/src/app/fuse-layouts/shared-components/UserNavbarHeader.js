@@ -15,7 +15,8 @@ const styles = theme => ({
         }
     },
     avatar: {
-        width     : 72,
+				color: '#000',
+				width     : 72,
         height    : 72,
         position  : 'absolute',
         top       : 92,
@@ -31,7 +32,8 @@ const styles = theme => ({
 });
 
 const UserNavbarHeader = ({user, classes}) => {
-    return (
+// src={user.data.photoURL && user.data.photoURL !== '' ? user.data.photoURL : "assets/images/avatars/profile.jpg"
+	return (
         <AppBar
             position="static"
             color="primary"
@@ -41,11 +43,11 @@ const UserNavbarHeader = ({user, classes}) => {
         >
             <Typography className="username text-16 whitespace-no-wrap" color="inherit">{user.data.displayName}</Typography>
             <Typography className="email text-13 mt-8 opacity-50 whitespace-no-wrap" color="inherit">{user.data.email}</Typography>
-            <Avatar
-                className={classNames(classes.avatar, "avatar")}
-                alt="user photo"
-                src={user.data.photoURL && user.data.photoURL !== '' ? user.data.photoURL : "assets/images/avatars/profile.jpg"}
-            />
+						
+						<Avatar
+                className={classNames(classes.avatar, "avatar")} alt="user initials" >
+								{user.data.initials}
+						</Avatar>
         </AppBar>
     );
 };

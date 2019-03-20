@@ -24,13 +24,15 @@ module.exports.Register =  async (req, res, nex)=>{
   //check whether the email is created
   const foundUser = await User.findOne({email});
   if(foundUser){
-    return res.status(403).json({error: 'Email is already existed'});
+    return res.status(403).json({error: 'Email already exists'});
   }
   //create new user
   const NewUser = new User({user_name, email, password, full_name, admin});
   const save_user = await NewUser.save();
 
-  const token = signToken(save_user);
+	const token = signToken(save_user);
+	
+	// assets/images/avatars/profile.jpg
 
   EmbedAdmin(save_user)
     .then(user_embed =>{
@@ -38,10 +40,11 @@ module.exports.Register =  async (req, res, nex)=>{
         role: user_embed.admin.role,
         data: {
           displayName: user_embed.user_name,
-          photoURL   : 'assets/images/avatars/Abbott.jpg',
+          photoURL   : '',
           email      : user_embed.email,
           settings   : {},
-          shortcuts  : []
+					shortcuts  : [],
+					initials 	 : `${user_embed.full_name.first_name.charAt(0).toUpperCase()}${user_embed.full_name.last_name.charAt(0).toUpperCase()}`
         }
       }
       return res.status(200).json({access_token:token, user: user});
@@ -61,10 +64,11 @@ module.exports.signIn = (req, res, nex)=>{
         role: user_embed.admin.role,
         data: {
           displayName: user_embed.user_name,
-          photoURL   : 'assets/images/avatars/Abbott.jpg',
+          photoURL   : '',
           email      : user_embed.email,
           settings   : {},
-          shortcuts  : []
+					shortcuts  : [],
+					initials 	 : `${user_embed.full_name.first_name.charAt(0).toUpperCase()}${user_embed.full_name.last_name.charAt(0).toUpperCase()}`
         }
       }
       if(token){
