@@ -114,7 +114,7 @@ class CoursesPage extends Component {
 								<div className = "mt-12" >
 									<div className = "w-full max-w-full mx-auto" >
 									<FuseAnimateGroup enter = {{animation: "transition.slideUpBigIn"}} className = "flex items-center justify-center flex-wrap" >
-									<div className = "w-full max-w-320 p-12" >
+									
 									
 									{/* <Card className = "relative" >
 									<div className = "pt-48 pb-24 text-center" >
@@ -137,12 +137,12 @@ class CoursesPage extends Component {
 									</div>
 									</CardContent>
 									</Card> */}
-									
-									<List className="border border-black rounded h-512">
-										<FuseScrollbars className="flex-grow overflow-x-auto">
-										<ListItem>
-      				    		<ListItemText primary="Year 1" />
-      	 						</ListItem>
+									<div className = "w-full max-w-288  p-12 border border-black rounded h-512" >
+									<Typography variant = "subtitle1" color = "inherit" className = "text-20 font-medium" >
+											Year 1
+									</Typography>
+									<div className = "w-full max-w-288 overflow-auto p-8 h-400">
+									<List>
 										 {
 										Object.entries(courses).map(course => {
 											if(course[1].department._id === department && course[1].course_level === 1000) {
@@ -154,17 +154,17 @@ class CoursesPage extends Component {
 											}
 										})
 										}
-									</FuseScrollbars>
 									</List>
+									</div>
 									</div>
 									
 		
-									<div className = "w-full max-w-320 p-12" >
-									<List className="border border-black rounded h-512" subheader>
-										<FuseScrollbars className="flex-grow overflow-x-auto">
-										<ListItem>
-      				    		<ListItemText primary="Year 2" />
-      	 						</ListItem>
+									<div className = "w-full max-w-288  p-12 border border-black rounded h-512" >
+									<Typography variant = "subtitle1" color = "inherit" className = "text-20 font-medium" >
+											Year 2
+									</Typography>
+									<div className = "w-full max-w-288 overflow-auto p-8 h-400">
+									<List>
 										 {
 										Object.entries(courses).map(course => {
 											if(course[1].department._id === department && course[1].course_level === 2000) {
@@ -176,16 +176,16 @@ class CoursesPage extends Component {
 											}
 										})
 										}
-									</FuseScrollbars>
 									</List>
 									</div>
+									</div>
 		
-									<div className = "w-full max-w-320 p-12" >
-									<List className="border border-black rounded h-512">
-										<FuseScrollbars className="flex-grow overflow-x-auto">
-										<ListItem>
-      				    		<ListItemText primary="Year 3" />
-      	 						</ListItem>
+									<div className = "w-full max-w-288  p-12 border border-black rounded h-512" >
+									<Typography variant = "subtitle1" color = "inherit" className = "text-20 font-medium" >
+											Year 3
+									</Typography>
+									<div className = "w-full max-w-288 overflow-auto p-8 h-400">
+									<List>
 										 {
 										Object.entries(courses).map(course => {
 											if(course[1].department._id === department && course[1].course_level === 3000) {
@@ -197,16 +197,16 @@ class CoursesPage extends Component {
 											}
 										})
 										}
-									</FuseScrollbars>
 									</List>
 									</div>
+									</div>
 		
-									<div className = "w-full max-w-320 p-12" >
-									<List className="border border-black rounded h-512">
-										<FuseScrollbars className="flex-grow overflow-x-auto">
-										<ListItem>
-      				    		<ListItemText primary="Year 4" />
-      	 						</ListItem>
+									<div className = "w-full max-w-288  p-12 border border-black rounded h-512" >
+									<Typography variant = "subtitle1" color = "inherit" className = "text-20 font-medium" >
+											Year 4
+									</Typography>
+									<div className = "w-full max-w-288 overflow-auto p-8 h-400">
+									<List>
 										 {
 										Object.entries(courses).map(course => {
 											if(course[1].department._id === department && course[1].course_level === 4000) {
@@ -218,8 +218,8 @@ class CoursesPage extends Component {
 											}
 										})
 										}
-									</FuseScrollbars>
 									</List>
+									</div>
 									</div>
 									</FuseAnimateGroup>
 									</div>
