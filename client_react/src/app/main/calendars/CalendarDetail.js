@@ -326,7 +326,7 @@ function mapStateToProps({CalendarsApp_Pro,DepartmentApp,SemesterApp,auth})
 {
     return {
         calendar: CalendarsApp_Pro.calendar.calendar_data,
-        departments: DepartmentApp.departments.entities,
+        departments: DepartmentApp.departments.orignal_entities,
         semesters : SemesterApp.semester.data,
         current_user: auth.user
     }

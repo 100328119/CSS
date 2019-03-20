@@ -209,7 +209,7 @@ function mapDispatchToProps(dispatch)
 function mapStateToProps({instructorsApp, DepartmentApp})
 {
     return {
-      departments: DepartmentApp.departments.entities,
+      departments: DepartmentApp.departments.orignal_entities,
       vetCourseDialog: instructorsApp.instructor.vetCourseDialog,
       course_by_department: instructorsApp.instructor.course_by_department
     }
