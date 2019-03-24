@@ -31,7 +31,7 @@ module.exports.Register =  async (req, res, nex)=>{
   const save_user = await NewUser.save();
 
 	const token = signToken(save_user);
-	
+
 	// assets/images/avatars/profile.jpg
 
   EmbedAdmin(save_user)
