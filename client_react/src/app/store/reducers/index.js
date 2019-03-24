@@ -5,6 +5,7 @@ import CampusApp from 'app/main/campus/store/reducers';
 import BuildingApp from 'app/main/building/store/reducers';
 import DepartmentApp from 'app/main/departments/store/reducers';
 import SemesterApp from 'app/main/semester/store/reducers';
+import CalendarApp from 'app/main/calendar/store/reducers';
 import quickPanel from 'app/fuse-layouts/shared-components/quickPanel/store/reducers';
 
 const createReducer = (asyncReducers) =>
@@ -16,6 +17,7 @@ const createReducer = (asyncReducers) =>
         BuildingApp,
         DepartmentApp,
         SemesterApp,
+        CalendarApp,
         ...asyncReducers
     });
 

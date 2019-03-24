@@ -3,7 +3,23 @@ import lightBlue from '@material-ui/core/colors/lightBlue';
 import red from '@material-ui/core/colors/red';
 
 const themesConfig = {
-    default    : {
+  default       : {
+    palette: {
+      type: "light",
+      primary: {
+        light: "#86fff7",
+        main: "#6B1C1C",
+        dark: "#6B1C1C"
+      },
+      secondary: {
+        light: "#ff9d99",
+        main: "#ff6b6b",
+        dark: "#6B1C1C",
+        contrastText: "#fff"
+      }
+    }
+  },
+    fuse    : {
         palette: {
             type     : 'light',
             primary  : fuseDark,

@@ -6,9 +6,9 @@ const settingsConfig = {
     customScrollbars: true,
     theme           : {
         main   : 'default',
-        navbar : 'mainThemeDark',
-        toolbar: 'mainThemeLight',
-        footer : 'mainThemeDark'
+        navbar : 'default',
+        toolbar: 'default',
+        footer : 'default'
     }
 };
 

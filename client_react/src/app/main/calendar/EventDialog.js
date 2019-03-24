@@ -8,9 +8,8 @@ import moment from 'moment';
 import * as Actions from './store/actions';
 
 const defaultEventState = {
-    id    : FuseUtils.generateGUID(),
     title : '',
-    allDay: true,
+    allDay: false,
     start : new Date(),
     end   : new Date(),
     desc  : ''
@@ -190,7 +189,7 @@ class EventDialog extends Component {
                         </Button>
                         <IconButton
                             onClick={() => {
-                                removeEvent(this.state.id);
+                                removeEvent(this.state._id);
                                 this.closeComposeDialog();
                             }}
                         >

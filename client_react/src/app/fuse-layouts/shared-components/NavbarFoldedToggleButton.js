@@ -7,14 +7,16 @@ import connect from 'react-redux/es/connect/connect';
 
 const NavbarFoldedToggleButton = ({settings, setDefaultSettings, children}) => {
     return (
+      <div style={{ backgroundColor: "white", height: 65 }}>
         <IconButton
             onClick={() => {
                 setDefaultSettings(_.set({}, 'layout.config.navbar.folded', !settings.layout.config.navbar.folded));
             }}
-            color="inherit"
+            color="dark"
         >
             {children}
         </IconButton>
+        </div>
     );
 };
 

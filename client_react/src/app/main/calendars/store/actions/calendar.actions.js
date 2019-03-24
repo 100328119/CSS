@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {FuseUtils} from '@fuse';
 import {showMessage} from 'app/store/actions/fuse';
+import history from 'history.js';
 
 export const NEW_CALENDAR = '[CALENDARS APP]CREATE NEW CALENDAR';
 export const GET_CALENDAR = '[CALENDAR APP] GET EXIST CALENDAR';
@@ -47,6 +48,9 @@ export function saveCalendar(calendar,uuid)
         type:SAVE_CALENDAR,
         payload:response.data
       })
+      history.push({
+          pathname: '/calendar/'+response.data._id
+      });
     }).catch(err=>console.log(err))
   }
 }

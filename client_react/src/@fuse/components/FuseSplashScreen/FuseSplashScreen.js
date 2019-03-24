@@ -7,7 +7,7 @@ const FuseSplashScreen = () => {
             <div className="center">
 
                 <div className="logo">
-                    <img width="128" src="assets/images/logos/fuse.svg" alt="logo"/>
+                    <img width="128" src="https://www.kpu.ca/sites/all/themes/kwantlen_v3/img/logo.svg" alt="logo"/>
                 </div>
                 <div className="spinner-wrapper">
                     <div className="spinner">

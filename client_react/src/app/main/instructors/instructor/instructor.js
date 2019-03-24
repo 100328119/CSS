@@ -59,9 +59,25 @@ class Instructor extends Component {
           "NR1"
         ]
     };
+    constructor(props) {
+      super(props);
+      // Don't call this.setState() here!
+      this.state = {
+          tabValue: 0,
+          form    : null,
+          new_instructor :false,
+          professor_type:[
+            "Full Time Regular",
+            "NR2",
+            "NR1"
+          ]
+      };
+      this.props.getDepartmentsOrignal();
+    }
 
     componentDidMount()
     {
+
         this.updateInstructorState();
     }
 
@@ -92,7 +108,6 @@ class Instructor extends Component {
     updateInstructorState = () => {
         const params = this.props.match.params;
         const instructor_id = params.id;
-        this.props.getDepartmentsOrignal();
         if ( instructor_id === 'new' )
         {
             this.props.newInstructor();
@@ -142,6 +157,7 @@ class Instructor extends Component {
         let department = [];
         if(this.props.department != null){
           department = this.props.department;
+          console.log(department);
         }
 
         const {tabValue, form, new_instructor} = this.state;
@@ -423,7 +439,7 @@ function mapStateToProps({instructorsApp, DepartmentApp})
 {
     return {
       instructor: instructorsApp.instructor.data,
-      department: DepartmentApp.departments.entities,
+      department: DepartmentApp.departments.orignal_entities,
       vetted_course_update: instructorsApp.instructor.vetted_course_update,
       course_by_department: instructorsApp.instructor.course_by_department
     }

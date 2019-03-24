@@ -3,6 +3,7 @@ import _ from '@lodash';
 
 const initialState = {
     entities          : [],
+    orignal_entities  : [],
     searchText        : '',
     departmentDialog     : {
         type : 'new',
@@ -27,7 +28,7 @@ const departmentsReducer = function (state = initialState, action) {
         {
             return {
                 ...state,
-                entities   : action.payload
+                orignal_entities   : action.payload
             };
         }
         case Actions.SET_SEARCH_TEXT:
