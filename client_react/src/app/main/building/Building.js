@@ -11,6 +11,7 @@ import * as Campus_Actions from '../campus/store/actions';
 import reducer from './store/reducers';
 import BuildingList from './BuildingList';
 import BuildingDialog from './BuildingDialog';
+import BuildingHeader from './BuildingHeader';
 
 const styles = theme => ({
     addButton: {
@@ -43,6 +44,9 @@ class BuildingApp extends Component {
                     sidebarInner
                     content={
                       <BuildingList/>
+                    }
+                    header={
+                      <BuildingHeader/>
                     }
                     onRef={instance => {
                         this.pageLayout = instance;

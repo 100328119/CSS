@@ -11,7 +11,7 @@ export const OPEN_EDIT_BUILDING_DIALOG = "[BUILDING APP] OPEN EDIT BUILDING DIAL
 export const CLOSE_EDIT_BUILDING_DIALOG = "[BUILDING APP] CLOSE EDIT BUILDING DIALOG";
 export const UPDATE_BUILDING = "[BUILDING APP] UPDATE EXITS BUILDING";
 export const REMOVE_BUILDING = "[BUILDING APP] REMOVE BUILDING";
-
+export const SET_SEARCH_TEXT = '[BUILDING APP] SET SEARCH TEXT';
 
 export function getBuilding(){
   const request = axios.get("http://localhost:4000/api/building/");
@@ -121,5 +121,13 @@ export function removeBuilding(building_id){
         })
       ]).then(()=>dispatch(getBuilding()))
     })
+  }
+}
+
+export function setSearchText(event)
+{
+  return {
+    type: SET_SEARCH_TEXT,
+    searchText: event.target.value
   }
 }

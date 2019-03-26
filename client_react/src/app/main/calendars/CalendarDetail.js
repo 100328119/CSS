@@ -265,7 +265,7 @@ class CalendarDetail extends Component {
                                         autoFocus
                                         id="first_name"
                                         name="full_name.first_name"
-                                        value={form.owner.full_name.first_name}
+                                        value={form.owner ? form.owner.full_name.first_name: "" }
                                         // onChange={this.handleChange}
                                         disable={true}
                                         variant="outlined"
@@ -277,7 +277,7 @@ class CalendarDetail extends Component {
                                         label="Last Name"
                                         id="last_name"
                                         name="full_name.last_name"
-                                        value={form.owner.full_name.last_name}
+                                        value={form.owner ? form.owner.full_name.last_name : ""}
                                         // onChange={this.handleChange}
                                         disable={true}
                                         variant="outlined"
@@ -292,7 +292,7 @@ class CalendarDetail extends Component {
                                         label="User Name"
                                         id="user_name"
                                         name="user_name"
-                                        value={form.owner.user_name}
+                                        value={form.owner ? form.owner.user_name : ""}
                                         // onChange={this.handleChange}
                                         disable={true}
                                         variant="outlined"

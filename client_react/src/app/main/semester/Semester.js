@@ -10,6 +10,7 @@ import * as Actions from './store/actions';
 import reducer from './store/reducers';
 import SemesterList from './SemesterList';
 import SemesterDialog from './SemesterDialog';
+import SemesterHeader from './SemesterHeader';
 
 const styles = theme => ({
     addButton: {
@@ -32,10 +33,10 @@ class SemesterApp extends Component {
 
     componentDidUpdate(prevProps, prevState)
     {
-        // if ( !_.isEqual(this.props.location, prevProps.location) )
-        // {
-        //     this.props.getContacts(this.props.match.params);
-        // }
+        if ( !_.isEqual(this.props.location, prevProps.location) )
+        {
+            this.props.getSemester();
+        }
     }
 
     render()
@@ -49,6 +50,9 @@ class SemesterApp extends Component {
                         leftSidebar       : "w-256 border-0",
                         header            : "min-h-72 h-72 sm:h-136 sm:min-h-136"
                     }}
+                    header={
+                      <SemesterHeader/>
+                    }
                     content={
                         <SemesterList/>
                     }

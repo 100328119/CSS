@@ -65,6 +65,13 @@ const semesterReducer = function (state = initialState, action){
         }
       }
     }
+    case Actions.SET_SEARCH_TEXT:
+    {
+      return{
+        ...state,
+        searchText: action.searchText
+      }
+    }
     default:
     {
       return state
@@ -72,4 +79,4 @@ const semesterReducer = function (state = initialState, action){
   }
 }
 
-export default semesterReducer; 
+export default semesterReducer;

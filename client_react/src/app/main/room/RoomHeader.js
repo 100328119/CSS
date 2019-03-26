@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as Actions from './store/actions';
 
-class DepartmentsHeader extends Component {
+class RoomHeader extends Component {
 
     render()
     {
@@ -29,7 +29,7 @@ class DepartmentsHeader extends Component {
                             <Icon className="text-32 mr-12">account_box</Icon>
                         </FuseAnimate>
                         <FuseAnimate animation="transition.slideLeftIn" delay={300}>
-                            <Typography variant="h6" className="hidden sm:flex">Departments</Typography>
+                            <Typography variant="h6" className="hidden sm:flex">Room</Typography>
                         </FuseAnimate>
                     </div>
                 </div>
@@ -70,12 +70,12 @@ function mapDispatchToProps(dispatch)
     }, dispatch);
 }
 
-function mapStateToProps({departmentsApp, fuse})
+function mapStateToProps({RoomApp, fuse})
 {
     return {
-        searchText: departmentsApp.departments.searchText,
+        searchText: RoomApp.room.searchText,
         mainTheme : fuse.settings.mainTheme
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DepartmentsHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomHeader);

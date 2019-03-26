@@ -10,6 +10,7 @@ export const CLOSE_EDIT_SEMESTER_DIALOG = '[SEMESTER APP] CLOSE EDIT SEMESTER DI
 export const ADD_SEMSERT = '[SEMESTER APP] ADD NEW SEMESTER';
 export const EDIT_SEMESTER = '[SEMESTER APP] EDIT SEMESTER';
 export const REMOVE_SEMESTER = '[SEMESTER APP] REMOVE SEMESTER';
+export const SET_SEARCH_TEXT = '[SEMESTER APP] SET SEARCH TEXT';
 
 export function getSemester(){
   const request = axios.get("http://localhost:4000/api/semester/");
@@ -98,5 +99,12 @@ export function removeSemester(semester_id){
         })
       ]).then(()=>dispatch(getSemester()))
     }).catch(err=>console.log(err))
+  }
+}
+
+export function setSearchText(event){
+  return {
+    type: SET_SEARCH_TEXT,
+    searchText: event.target.value
   }
 }

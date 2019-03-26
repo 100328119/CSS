@@ -109,13 +109,20 @@ const defaultFilterMethod = (filter, row) => {
     const id = filter.pivotId || filter.id;
     // Pivoted rows won't contain the column.
     //  If that's the case, we set the to true (allowing us to only filter on the current column)
-    const rowValue = row[id].toLowerCase();
+    let rowValue = '';
+    if(typeof row[id] === "string" || row[id] instanceof String){
+       rowValue = row[id].toLowerCase();
+    }else{
+      rowValue = row[id].toString();
+    }
+
     if ( !rowValue )
     {
         return true;
     }
 
     const filterValue = filter.value.filterValue.toLowerCase() || '';
+
     const filterType = filter.value.filterType;
 
     switch ( filterType )

@@ -24,6 +24,12 @@ const styles = theme => ({
         color   : orange[400],
         opacity : 0
     },
+    addButton: {
+        position: 'absolute',
+        right   : 12,
+        bottom  : 12,
+        zIndex  : 99
+    },
     productImageItem        : {
         transitionProperty      : 'box-shadow',
         transitionDuration      : theme.transitions.duration.short,
@@ -49,16 +55,16 @@ const styles = theme => ({
 
 class Instructor extends Component {
 
-    state = {
-        tabValue: 0,
-        form    : null,
-        new_instructor :false,
-        professor_type:[
-          "Full Time Regular",
-          "NR2",
-          "NR1"
-        ]
-    };
+    // state = {
+    //     tabValue: 0,
+    //     form    : null,
+    //     new_instructor :false,
+    //     professor_type:[
+    //       "Full Time Regular",
+    //       "NR2",
+    //       "NR1"
+    //     ]
+    // };
     constructor(props) {
       super(props);
       // Don't call this.setState() here!
@@ -327,8 +333,7 @@ class Instructor extends Component {
                           </div>
                         )}
                         {tabValue === 1 && (
-                          <>
-                          <FuseAnimate animation="transition.slideUpIn" delay={300}>
+                          <div>
                               <ReactTable
                                   className="-striped -highlight border-0"
                                   getTrProps={(state, rowInfo, column) => {
@@ -395,9 +400,15 @@ class Instructor extends Component {
                                   defaultPageSize={10}
                                   noDataText="No instructors found"
                               />
-                            </FuseAnimate>
+                                <Fab
+                                    color="primary"
+                                    aria-label="add"
+                                    className={classes.addButton}
+                                >
+                                    <Icon>person_add</Icon>
+                                </Fab>
                             <VettedCourseDialog/>
-                            </>
+                            </div>
                         )}
                         {tabValue === 2 && (
                             <div>

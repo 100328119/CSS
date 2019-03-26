@@ -13,7 +13,8 @@ export const CLOSE_EDIT_CAMPUS_DIAOG = "[CAMPS APP] CLOSE EDIT CAMPUS DIALOG";
 export const SET_CAMPUS_SEARCH_TEXT = '[CAMPUS APP] SET CAMPUS SEARCH TEXT';
 export const ADD_CAMPUS = "[CAMPUS APP] ADD NEW CAMPUS";
 export const UPDATE_CAMPUS = "[CAMPUS APP] EDIT CAMPUS";
-export const REMOVE_CAMPUS = "[CAMPUS APP] REMOVE CAMPUS"
+export const REMOVE_CAMPUS = "[CAMPUS APP] REMOVE CAMPUS";
+
 
 export function getCampus(){
   const request = axios.get("http://localhost:4000/api/campus/");
@@ -113,4 +114,12 @@ export function removeCampus(campus_id){
       ]).then(()=>dispatch(getCampus()))
     })
   }
+}
+
+export function setSearchText(event)
+{
+    return {
+        type      : SET_CAMPUS_SEARCH_TEXT,
+        searchText: event.target.value
+    }
 }

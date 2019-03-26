@@ -25,12 +25,12 @@ class SemesterList extends Component {
         // const { contacts, user, searchText, selectedContactIds, selectAllContacts, deSelectAllContacts, toggleInSelectedContacts, openEditContactDialog, removeContacts, removeContact, toggleStarredContact, setContactsUnstarred, setContactsStarred} = this.props;
         const {semesters, openEditSemesterDialog,searchText,removeSemester} = this.props;
         console.log(semesters);
-        let data = [];
-        if(semesters != undefined){
-          data = this.getFilteredArray(semesters, searchText);
-        }
+        // let data = [];
+        // if(semesters != undefined && searchText != undefined){
+        //   data = this.getFilteredArray(semesters, searchText);
+        // }
         // const data = "";
-
+        const data = this.getFilteredArray(semesters, searchText);
         if ( !data && data.length === 0 )
         {
             return (

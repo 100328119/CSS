@@ -78,6 +78,13 @@ const buildingReducer = function (state = initialState, action){
         }
       }
     }
+    case Actions.SET_SEARCH_TEXT:
+    {
+      return{
+        ...state,
+        searchText: action.searchText
+      }
+    }
     default:
     {
       return state

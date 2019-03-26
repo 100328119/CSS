@@ -10,6 +10,7 @@ export const CLOSE_EDIT_ROOM_DIALOG = "[ROOM APP] CLOSE EDIT ROOM DIALOG";
 export const ADD_ROOM = '[ROOM APP] ADD NEW ROOM';
 export const EDIT_ROOM = '[ROOM APP] EDIT ROOM';
 export const REMOVE_ROOM = '[ROOM APP] REMOVE ROOM';
+export const SET_SEARCH_TEXT = '[ROOM APP] SET_SEARCH_TEXT';
 
 export function getRoom(){
   const request = axios.get("http://localhost:4000/api/room/");
@@ -107,5 +108,13 @@ export function removeRoom(room_id){
           })
         ]).then(()=>dispatch(getRoom()))
     })
+  }
+}
+
+export function setSearchText(event)
+{
+  return {
+    type:SET_SEARCH_TEXT,
+    searchText: event.target.value
   }
 }

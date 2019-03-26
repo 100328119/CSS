@@ -11,6 +11,7 @@ import * as Building_Actions from '../building/store/actions';
 import reducer from './store/reducers';
 import RoomList from './Roomlist';
 import RoomDialog from './RoomDialog';
+import RoomHeader from './RoomHeader';
 
 
 const styles = theme => ({
@@ -44,6 +45,9 @@ class RoomApp extends Component {
                     sidebarInner
                     content={
                       <RoomList/>
+                    }
+                    header={
+                      <RoomHeader/>
                     }
                     onRef={instance => {
                         this.pageLayout = instance;
