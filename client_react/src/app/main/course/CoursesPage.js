@@ -113,7 +113,7 @@ class CoursesPage extends Component {
 
 								<div className = "mt-12" >
 									<div className = "w-full max-w-full mx-auto" >
-									<FuseAnimateGroup enter = {{animation: "transition.slideUpBigIn"}} className = "flex items-center justify-center flex-wrap" >
+									<FuseAnimateGroup enter = {{animation: "transition.slideUpBigIn"}} className = "flex items-center justify-center" >
 
 									{/* <Card className = "relative" >
 									<div className = "pt-48 pb-24 text-center" >

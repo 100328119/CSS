@@ -15,16 +15,20 @@ const styles = theme => ({
         }
     },
     avatar: {
-				color: '#000',
-				width     : 72,
-        height    : 72,
+				color: '#fff',
+				width     : 65,
+        height    : 65,
         position  : 'absolute',
         top       : 92,
         padding   : 8,
-        background: theme.palette.background.default,
+        // background: theme.palette.background.default,
+        background: "#6c0000",
         boxSizing : 'content-box',
         left      : '50%',
         transform : 'translateX(-50%)',
+        borderWidth: 5,
+        borderColor: '#aaa',
+
         '& > img' : {
             borderRadius: '50%'
         }
