@@ -28,17 +28,7 @@ class UserMenu extends Component {
             <React.Fragment>
 
                 <Button className="h-64" onClick={this.userMenuClick}>
-                    {user.data.photoURL ?
-                        (
-                            <Avatar className="" alt="user photo" src={user.data.photoURL}/>
-                        )
-                        :
-                        (
-                            <Avatar className="">
-                                {user.data.displayName[0]}
-                            </Avatar>
-                        )
-                    }
+                    
 
                     <div className="hidden md:flex flex-col ml-12 items-start">
                         <Typography component="span" className="normal-case font-600 flex">
@@ -85,18 +75,7 @@ class UserMenu extends Component {
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
-                            <MenuItem component={Link} to="/pages/profile" onClick={this.userMenuClose}>
-                                <ListItemIcon>
-                                    <Icon>account_circle</Icon>
-                                </ListItemIcon>
-                                <ListItemText className="pl-0" primary="My Profile"/>
-                            </MenuItem>
-                            <MenuItem component={Link} to="/apps/mail" onClick={this.userMenuClose}>
-                                <ListItemIcon>
-                                    <Icon>mail</Icon>
-                                </ListItemIcon>
-                                <ListItemText className="pl-0" primary="Inbox"/>
-                            </MenuItem>
+
                             <MenuItem
                                 onClick={() => {
                                     logout();

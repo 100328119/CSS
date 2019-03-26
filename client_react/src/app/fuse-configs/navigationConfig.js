@@ -8,9 +8,9 @@ const navigationConfig = [
         'children': [
             {
                 'id'   : 'dashboard-component',
-                'title': 'dashboard',
+                'title': 'Dashboard',
                 'type' : 'item',
-                'icon' : 'today',
+                'icon' : 'home',
                  auth  : authRoles.user,
                 'url'  : '/dashboard/boards'
             },
@@ -18,7 +18,7 @@ const navigationConfig = [
                 'id'   : 'Administration-component',
                 'title': 'Administration',
                 'type' : 'item',
-                'icon' : 'today',
+                'icon' : 'how_to_reg',
                 'auth' : authRoles.admin,
                 'url'  : '/admin/users'
             },
@@ -26,7 +26,7 @@ const navigationConfig = [
                 'id'   : 'Campus-component',
                 'title': 'Campus',
                 'type' : 'item',
-                'icon' : 'today',
+                'icon' : 'location_city',
                 'auth' : authRoles.admin,
                 'url'  : '/campus'
             },
@@ -34,7 +34,7 @@ const navigationConfig = [
                 'id'   : 'Building-component',
                 'title': 'Building',
                 'type' : 'item',
-                'icon' : 'today',
+                'icon' : 'domain',
                 'auth' : authRoles.admin,
                 'url'  : '/building'
             },
@@ -42,7 +42,7 @@ const navigationConfig = [
                 'id'   : 'Room-component',
                 'title': 'Room',
                 'type' : 'item',
-                'icon' : 'today',
+                'icon' : 'meeting_room',
                 'auth' : authRoles.admin,
                 'url'  : '/room'
             },
@@ -50,37 +50,37 @@ const navigationConfig = [
                 'id'   : 'Semester-component',
                 'title': 'Semester',
                 'type' : 'item',
-                'icon' : 'today',
+                'icon' : 'photo',
                 'auth' : authRoles.admin,
                 'url'  : '/semesters'
             },
             {
               'id'   : 'instructor-component',
-              'title': 'instructor',
+              'title': 'Instructor',
               'type' : 'item',
-              'icon' : 'today',
+              'icon' : 'person',
               'auth' : authRoles.admin,
               'url'  : '/instructors'
             },
             {
               'id'   : 'department-component',
-              'title': 'department',
+              'title': 'Department',
               'type' : 'item',
-              'icon' : 'today',
+              'icon' : 'people',
               'auth' : authRoles.admin,
               'url'  : '/departments'
             },
             {
               'id'   : 'course-component',
-              'title': 'course',
+              'title': 'Course',
               'type' : 'item',
-              'icon' : 'today',
+              'icon' : 'school',
               'auth' : authRoles.admin,
               'url'  : '/courses'
             },
             {
               'id'   : 'calendar-component',
-              'title': 'calendar',
+              'title': 'Calendar',
               'type' : 'item',
               'icon' : 'today',
               'url'  : '/calendar'

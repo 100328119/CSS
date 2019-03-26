@@ -23,7 +23,11 @@ const styles = theme => ({
         fontSize     : 512,
         width        : 512,
         height       : 512,
-        pointerEvents: 'none'
+        pointerEvents: 'none',
+
+    },
+    root:{
+      color        : 'white'
     }
 });
 
@@ -167,7 +171,7 @@ class Boards extends Component {
                                                 // color     : theme.palette.getContrastText(department.color)
                                             }}
                                         >
-                                            <Typography className="font-medium truncate" color="inherit">{board.department.department_name}</Typography>
+                                            <Typography className={classes.root} color="inherit">{board.department.department_name}</Typography>
                                             <div className="flex items-center justify-center opacity-75">
                                             </div>
 
@@ -178,7 +182,7 @@ class Boards extends Component {
                                             role="button"
 
                                         >
-                                        <Typography className="text-center text-16 font-400">{board.semester.season+" "+board.semester.year}</Typography>
+                                        <Typography className="text-center text-24 font-400">{board.semester.season+" "+board.semester.year}</Typography>
                                         <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">{board.calendar_status}</Typography>
                                         </Link>
 
