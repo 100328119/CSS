@@ -244,10 +244,10 @@ class CalendarApp extends Component {
         d = d.slice(0, 2).toUpperCase();
         switch (d) {
           case "MO":
-            d = 0;
+            d = 1;
             break;
           case "TU":
-            d = 1;
+            d = 2;
             break;
           case "WE":
             d = 3;
