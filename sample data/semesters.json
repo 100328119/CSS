@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5c51134444c13b0421bb3271"},"type":"semester","year":{"$numberInt":"2019"},"duration":"15","season":"spring","from_date":"2019-01-03","end_date":"2019-04-30"}
+{"_id":{"$oid":"5c51134444c13b0421bb3272"},"type":"semester","year":{"$numberInt":"2019"},"duration":"15","season":"summer","from_date":"2019-05-03","end_date":"2019-08-30"}
+{"_id":{"$oid":"5c51134444c13b0421bb3273"},"type":"semester","year":{"$numberInt":"2019"},"duration":"15","season":"fall","from_date":"2019-09-03","end_date":"2019-11-30"}

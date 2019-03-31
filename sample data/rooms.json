@@ -1,0 +1,4 @@
+{"_id":{"$oid":"5c51e62944c13b0421bb3283"},"type":"room","room_num":{"$numberInt":"1050"},"equipment":{"num_seat":{"$numberInt":"15"},"projector":true,"pc":true},"floor":{"$numberInt":"1"},"building":"5c51e5d844c13b0421bb327c"}
+{"_id":{"$oid":"5c51e62944c13b0421bb3284"},"type":"room","room_num":{"$numberInt":"1045"},"equipment":{"num_seat":{"$numberInt":"15"},"projector":true,"pc":true},"floor":{"$numberInt":"1"},"building":"5c51e5d844c13b0421bb327c"}
+{"_id":{"$oid":"5c51e62944c13b0421bb3285"},"type":"room","room_num":{"$numberInt":"100"},"equipment":{"num_seat":{"$numberInt":"15"},"projector":true,"whiteboard":true},"floor":{"$numberInt":"1"},"building":"5c51e5d844c13b0421bb327d"}
+{"_id":{"$oid":"5c51e62944c13b0421bb3286"},"type":"room","room_num":{"$numberInt":"200"},"equipment":{"num_seat":{"$numberInt":"15"},"projector":true,"whiteboard":true},"floor":{"$numberInt":"2"},"building":"5c51e5d844c13b0421bb327e"}
