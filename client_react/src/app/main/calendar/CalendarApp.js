@@ -316,7 +316,7 @@ class CalendarApp extends Component {
       });
 
       var allDates = rule.all();
-      console.log(rule);
+
       allDates.map(date => {
         var eventClone = _.clone(event);
 
