@@ -262,7 +262,7 @@ class CalendarApp extends Component {
             d = 6;
             break;
           case "SU":
-            d = 7;
+            d = 0;
             break;
           default:
             d = 0;
