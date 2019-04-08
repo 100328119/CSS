@@ -375,21 +375,7 @@ class CalendarApp extends Component {
             })
           }
         />
-        <FuseAnimate animation="transition.expandIn" delay={500}>
-          <Fab
-            color="secondary"
-            aria-label="add"
-            className={classes.addButton}
-            onClick={() =>
-              openNewEventDialog({
-                start: new Date(),
-                end: new Date()
-              })
-            }
-          >
-            <Icon>add</Icon>
-          </Fab>
-        </FuseAnimate>
+
         <EventDialog />
       </div>
     );
