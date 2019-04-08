@@ -137,10 +137,7 @@ class CalendarHeader extends Toolbar {
       ));
     }
   }
-  componentDidUpdate() {
-    // console.log("Calendar Header Updated");
-    // console.log(this.props);
-  }
+
   render() {
     const { classes, mainThemeDark, label, date, calender } = this.props;
 

@@ -177,19 +177,6 @@ class CalendarApp extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log(this);
-    // console.log("PREVIOS");
-    // console.log("PREVPROP");
-    // console.log(prevProps);
-    // console.log("PREVSTATE");
-    // console.log(prevState);
-
-    // console.log("CURRENT");
-    // console.log("PROP");
-    // console.log(this.props);
-    // console.log("STATE");
-    // console.log(this.state);
-    // if (prevProps != this.props)
     if (prevProps != this.props) {
       this.setState(
         { date: new Date(this.props.calendar.semester.from_date) },
@@ -332,7 +319,6 @@ class CalendarApp extends Component {
     return events3;
   };
   handleNavigate = (date, view, action) => {
-    console.log(date);
     this.setState({ date }, () => this.setState({ date }));
   };
   render() {
@@ -374,23 +360,10 @@ class CalendarApp extends Component {
           timeslots={6}
           components={{
             toolbar: props => {
-              console.log(this.toolbarProps);
-
               this.toolbarProps = props;
-              console.log(props);
-
               return null;
             }
           }}
-          // components={{
-          //   toolbar: props => {
-          //     this.toolbarProps = props;
-          //     return null;
-          //   }
-          // }}
-          // onNavigate={date => {
-          //   this.setState({}, () => this.setState(date));
-          // }}
           onNavigate={this.handleNavigate}
           onSelectEvent={event => {
             openEditEventDialog(event);
