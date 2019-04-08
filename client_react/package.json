@@ -57,10 +57,7 @@
         "react-virtualized": "9.21.0",
         "redux": "4.0.1",
         "redux-thunk": "2.3.0",
-<<<<<<< HEAD
-=======
         "rrule": "^2.6.0",
->>>>>>> Ferdi
         "typeface-muli": "0.0.71",
         "velocity-react": "1.4.1"
     },
