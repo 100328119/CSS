@@ -179,36 +179,12 @@ class EventDialog extends Component {
     this.props.instructors.map(instructor => {
       var courseId = this.state.courseId;
 
-      //   console.log(courseId);
-      //   console.log(instructor);
-      //   console.log(instructor.vetted_course);
       instructor.vetted_course.map(course => {
-        // console.log(courseId);
-        // console.log(course._id);
         if (courseId === course._id) {
           instructorId = instructor._id;
           instructorName = instructor.first_name + " " + instructor.last_name;
         }
       });
-      //   console.log(menuItems);
-      //   instructor.vetted_course.find(x => x._id === courseId)
-
-      //   instructor.vetted_course.map(course => {
-      // console.log(course);
-
-      // console.log(courseId);
-
-      // if (Object.values(course).indexOf(courseId) > -1) {
-      //   console.log("Instructor exists");
-      //   console.log(instructor);
-      //   console.log(instructor.first_name);
-      //   menuItems += (
-      //     <MenuItem value={instructor._id}>
-      //       {instructor.first_name + " " + instructor.last_name}
-      //     </MenuItem>
-      //   );
-      // }
-      //   });
     });
     if (instructorId != "" && instructorName != "") {
       return <MenuItem value={instructorId}>{instructorName}</MenuItem>;
@@ -216,22 +192,6 @@ class EventDialog extends Component {
       return <MenuItem value="N/A">N/A</MenuItem>;
     }
   }
-  //   renderWeekCheckboxes() {
-  //     var days = [
-  //       "Sunday",
-  //       "Monday",
-  //       "Tuesday",
-  //       "Wednesday",
-  //       "Thursday",
-  //       "Friday",
-  //       "Saturday"
-  //     ];
-  //     days.map(day => {
-  //       return (
-  //           <Checkbox
-  //       )
-  //     });
-  //   }
 
   handleChangeMultiple = event => {
     const { options } = event.target;
@@ -307,7 +267,6 @@ class EventDialog extends Component {
                   </MenuItem>
                   {this.renderCourseList()}
                 </Select>
-                {/* <FormHelperText>KPU Course</FormHelperText> */}
               </FormControl>
             </div>
             <br />
@@ -354,7 +313,7 @@ class EventDialog extends Component {
                 <Select
                   name="room"
                   // fix this
-                  value={this.state.room}
+                  value={this.state.room || ""}
                   onChange={this.handleClassroomChange}
                   fullWidth
                 >
@@ -367,6 +326,7 @@ class EventDialog extends Component {
               </FormControl>
             </div>
             <br />
+
             <TextField
               disabled
               id="campusName"
@@ -425,8 +385,7 @@ class EventDialog extends Component {
                 <InputLabel>Instructor</InputLabel>
                 <Select
                   name="instructor"
-                  // fix this
-                  value={this.state.instructor}
+                  value={this.state.instructor || ""}
                   onChange={this.handleInstructorInputChange}
                   fullWidth
                 >
@@ -435,7 +394,6 @@ class EventDialog extends Component {
                   </MenuItem>
                   {this.renderInstructorList()}
                 </Select>
-                {/* <FormHelperText>KPU Course</FormHelperText> */}
               </FormControl>
             </div>
             <br />
