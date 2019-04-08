@@ -22,8 +22,7 @@ import {
   Chip,
   Input
 } from "@material-ui/core";
-
-import FuseUtils from "@fuse/FuseUtils";
+import {FuseChipSelect,FuseUtils} from '@fuse';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import _ from "@lodash";
@@ -44,7 +43,8 @@ const defaultEventState = {
   instructorName: String,
   campusName: String,
   building: String,
-  scheduledDays: []
+  scheduledDays: [],
+  available_instructor:[]
 };
 
 const days = [
@@ -108,10 +108,10 @@ class EventDialog extends Component {
   handleClassroomChange = event => {
     // courseId = event.target.value;
 
-    var selectedRoom = this.props.rooms.find(x => x._id === event.target.value);
+    var selectedRoom = this.props.rooms.find(x => x._id === event.value);
 
     // console.log(selectedRoom.building.campus.campus_name);
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.name]: event.value });
     this.setState({ roomNumber: selectedRoom.room_num });
     this.setState({ roomId: selectedRoom._id });
     this.setState({ building: selectedRoom.building.building_name });
@@ -119,21 +119,23 @@ class EventDialog extends Component {
   };
   handleInputChange = event => {
     // courseId = event.target.value;
-
+    console.log(event);
     var selectedCourseInfo = this.props.kpuCourses.find(
-      x => x._id === event.target.value
+      x => x._id === event.value
     );
     // console.log(selectedCourseInfo);
     // console.log(selectedCourseInfo.course_num);
     // query course via id and get name
 
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.name]: event.value });
     this.setState({ courseNumber: selectedCourseInfo.course_num });
     this.setState({ courseId: selectedCourseInfo._id });
     this.setState({
       title: selectedCourseInfo.course_tag + " " + selectedCourseInfo.course_num
     });
+    this.setState({ course_name: selectedCourseInfo.course_name });
     // this.setState({title: selectedCourseInfo.})
+    this.setState({available_instructor:this.renderInstructorList()})
   };
 
   handleInstructorInputChange = event => {
@@ -146,7 +148,8 @@ class EventDialog extends Component {
     // console.log(selectedCourseInfo.course_num);
     // query course via id and get name
 
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.name]: event.value });
+    this.setState({ instructorName: event.label });
     // this.setState({ courseNumber: selectedCourseInfo.course_num });
     // this.setState({ courseId: selectedCourseInfo._id });
   };
@@ -173,7 +176,7 @@ class EventDialog extends Component {
 
   renderInstructorList() {
     // console.log(this.state.courseId);
-    var menuItems = [];
+    var available_instructore = [];
     var instructorId;
     var instructorName;
     this.props.instructors.map(instructor => {
@@ -181,29 +184,16 @@ class EventDialog extends Component {
 
       instructor.vetted_course.map(course => {
         if (courseId === course._id) {
-          instructorId = instructor._id;
-          instructorName = instructor.first_name + " " + instructor.last_name;
+          available_instructore.push(instructor)
         }
       });
     });
-    if (instructorId != "" && instructorName != "") {
-      return <MenuItem value={instructorId}>{instructorName}</MenuItem>;
-    } else {
-      return <MenuItem value="N/A">N/A</MenuItem>;
-    }
+    return available_instructore;
   }
 
+
   handleChangeMultiple = event => {
-    const { options } = event.target;
-    const value = [];
-    for (let i = 0, l = options.length; i < l; i += 1) {
-      if (options[i].selected) {
-        value.push(options[i].value);
-      }
-    }
-    this.setState({
-      scheduledDays: value
-    });
+    this.setState({scheduledDays: event.map(day => day.value)});
   };
   render() {
     const {
@@ -214,7 +204,8 @@ class EventDialog extends Component {
       kpuCourses,
       instructors,
       scheduledDays,
-      classes
+      classes,
+      rooms
     } = this.props;
 
     let kpuCoursesArray = [];
@@ -250,27 +241,26 @@ class EventDialog extends Component {
         </AppBar>
 
         <DialogContent classes={{ root: "p-16 pb-0 sm:p-24 sm:pb-0" }}>
-          <div>
-            <div>
-              <FormControl>
-                <InputLabel>Course</InputLabel>
-                <Select
-                  name="course"
-                  // fix this
-                  value={this.state.courseId}
-                  onChange={this.handleInputChange}
-                  fullWidth
-                  autoFocus
-                >
-                  <MenuItem disabled selected>
-                    KPU COURSE
-                  </MenuItem>
-                  {this.renderCourseList()}
-                </Select>
-              </FormControl>
-            </div>
-            <br />
-          </div>
+        <FuseChipSelect
+            className="mb-24"
+            value={{label:this.state.course_name,value:this.state._id}}
+            options={kpuCourses.map(kpuCourse=>({
+              value:kpuCourse._id,
+              label:kpuCourse.course_name,
+              name:"course"
+            }))}
+            onChange={this.handleInputChange}
+            name="Course"
+            placeholder="Select Course"
+            textFieldProps={{
+                label          : 'Course',
+                InputLabelProps: {
+                    shrink: true
+                },
+                variant        : 'outlined',
+                disabled       : false
+            }}
+        />
           <TextField
             disabled
             id="courseNumber"
@@ -306,27 +296,26 @@ class EventDialog extends Component {
             variant="outlined"
             fullWidth
           />
-          <div>
-            <div>
-              <FormControl>
-                <InputLabel>Room</InputLabel>
-                <Select
-                  name="room"
-                  // fix this
-                  value={this.state.room || ""}
-                  onChange={this.handleClassroomChange}
-                  fullWidth
-                >
-                  <MenuItem disabled selected>
-                    ROOM #
-                  </MenuItem>
-                  {this.renderRoomList()}
-                </Select>
-                {/* <FormHelperText>KPU Course</FormHelperText> */}
-              </FormControl>
-            </div>
-            <br />
-
+          <FuseChipSelect
+              className="mb-24"
+              value={{label:this.state.roomNumber,value:this.state.roomId}}
+              options={rooms.map(room=>({
+                value:room._id,
+                label:room.room_num,
+                name:"room"
+              }))}
+              onChange={this.handleClassroomChange}
+              name="Rooms"
+              placeholder="Select Rooms"
+              textFieldProps={{
+                  label          : 'Rooms',
+                  InputLabelProps: {
+                      shrink: true
+                  },
+                  variant        : 'outlined',
+                  disabled       : false
+              }}
+          />
             <TextField
               disabled
               id="campusName"
@@ -361,7 +350,6 @@ class EventDialog extends Component {
               variant="outlined"
               fullWidth
             />
-          </div>
           <TextField
             hidden
             id="title"
@@ -379,47 +367,47 @@ class EventDialog extends Component {
             variant="outlined"
             fullWidth
           />
-          <div>
-            <div>
-              <FormControl>
-                <InputLabel>Instructor</InputLabel>
-                <Select
-                  name="instructor"
-                  value={this.state.instructor || ""}
-                  onChange={this.handleInstructorInputChange}
-                  fullWidth
-                >
-                  <MenuItem disabled selected>
-                    Instructor
-                  </MenuItem>
-                  {this.renderInstructorList()}
-                </Select>
-              </FormControl>
-            </div>
-            <br />
-            <div>
-              <FormControl>
-                <InputLabel shrink htmlFor="select-multiple-native">
-                  Days
-                </InputLabel>
-                <Select
-                  multiple
-                  native
-                  value={this.state.scheduledDays}
-                  onChange={this.handleChangeMultiple}
-                  inputProps={{
-                    id: "select-multiple-native"
-                  }}
-                >
-                  {days.map(day => (
-                    <option key={day} value={day}>
-                      {day}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>
-            </div>
-          </div>
+          <FuseChipSelect
+              className="mb-24"
+              value={{label:this.state.instructorName,value:this.state.instructor}}
+              options={this.state.available_instructor.map(instructor=>({
+                value:instructor._id,
+                label:instructor.first_name + " " + instructor.last_name,
+                name:"instructor"
+              }))}
+              onChange={this.handleInstructorInputChange}
+              name="Instructor"
+              placeholder="Select Instructor"
+              textFieldProps={{
+                  label          : 'Instructor',
+                  InputLabelProps: {
+                      shrink: true
+                  },
+                  variant        : 'outlined',
+                  disabled       : false
+              }}
+          />
+          <FuseChipSelect
+              className="mb-24"
+              value={this.state.scheduledDays.map(day=>({label:day,value:day}))}
+              options={days.map(day=>({
+                value:day,
+                label:day,
+                name:"day"
+              }))}
+              onChange={this.handleChangeMultiple}
+              name="Days"
+              placeholder="Select Days"
+              textFieldProps={{
+                  label          : 'Days',
+                  InputLabelProps: {
+                      shrink: true
+                  },
+                  variant        : 'outlined',
+                  disabled       : false
+              }}
+              isMulti
+          />
 
           <FormControlLabel
             className="mt-8 mb-16"
