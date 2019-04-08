@@ -176,34 +176,30 @@ class CalendarApp extends Component {
     this.props.getEvents(calendarId);
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log(this.state);
-  //   console.log(this.props);
+  componentDidUpdate(prevProps, prevState) {
+    // console.log(this);
+    // console.log("PREVIOS");
+    // console.log("PREVPROP");
+    // console.log(prevProps);
+    // console.log("PREVSTATE");
+    // console.log(prevState);
 
-  //   if (this.props.calendar != null) {
-  //     console.log(this.props.calendar.semester.from_date);
-  //     console.log("PREV");
-  //     console.log(prevState.date);
-  //     console.log("CURRENT");
-  //     console.log(this.state.date);
-
-  //     if (
-  //       prevState.date.getTime() !=
-  //       new Date(this.props.calendar.semester.from_date).getTime()
-  //     ) {
-  //       console.log("DATES ARE DIFFERENT");
-  //       this.setState({
-  //         date: new Date(this.props.calendar.semester.from_date)
-  //       });
-  //     } else {
-  //       console.log("DATES ARE THE SAME");
-  //       // this.setState({
-  //       //   date: new Date(this.props.calendar.semester.from_date)
-  //       // });
-  //     }
-  //     console.log(this.state.date);
-  //   }
-  // }
+    // console.log("CURRENT");
+    // console.log("PROP");
+    // console.log(this.props);
+    // console.log("STATE");
+    // console.log(this.state);
+    // if (prevProps != this.props)
+    if (prevProps != this.props) {
+      this.setState(
+        { date: new Date(this.props.calendar.semester.from_date) },
+        () =>
+          this.setState({
+            date: new Date(this.state.date)
+          })
+      );
+    }
+  }
 
   moveEvent = ({ event, start, end }) => {
     this.props.updateEvent({
@@ -335,9 +331,10 @@ class CalendarApp extends Component {
 
     return events3;
   };
-  handleNavigate(date, view, action) {
-    this.setState({ date: moment(date).toDate() });
-  }
+  handleNavigate = (date, view, action) => {
+    console.log(date);
+    this.setState({ date }, () => this.setState({ date }));
+  };
   render() {
     const {
       classes,
@@ -348,25 +345,12 @@ class CalendarApp extends Component {
     let events = [];
 
     let semesterInfo = [];
-    var semestInfoY;
-    var semestInfoM;
-    var semestInfoD;
+
     if (calendar !== null) {
       events = calendar.sections;
       semesterInfo = calendar.semester;
-      semestInfoY = new Date(semesterInfo.from_date).getUTCFullYear();
-      semestInfoM = new Date(semesterInfo.from_date).getUTCMonth();
-      semestInfoD = new Date(semesterInfo.from_date).getUTCDay();
-
-      // this.setState({ date: new Date(semesterInfo.from_date) });
     }
 
-    var date1 = new Date(semestInfoY, semestInfoM, semestInfoD, 0, 0, 0, 0);
-    var date2 = new Date(2019, 8, 1, 0, 0, 0);
-    // console.log(date1);
-    // console.log(date2);
-
-    var sDate = new Date(semestInfoY, semestInfoM, semestInfoD, 0, 0, 0, 0);
     return (
       <div
         className={classNames(classes.root, "flex flex-col flex-auto relative")}
@@ -381,10 +365,7 @@ class CalendarApp extends Component {
           onEventDrop={this.moveEvent}
           resizable
           onEventResize={this.resizeEvent}
-          // date={semesterInfo.from_date}
-          // date={this.state.date}
-          defaultDate={new Date()}
-          // defaultDate={this.state.date}
+          date={this.state.date}
           defaultView={BigCalendar.Views.WEEK}
           startAccessor="start"
           endAccessor="end"
@@ -393,16 +374,24 @@ class CalendarApp extends Component {
           timeslots={6}
           components={{
             toolbar: props => {
+              console.log(this.toolbarProps);
+
               this.toolbarProps = props;
+              console.log(props);
+
               return null;
             }
           }}
-          onNavigate={date => {
-            this.setState({}, () => this.setState(date));
-          }}
-          // onNavigate={date => {
-          //   this.setState({ date });
+          // components={{
+          //   toolbar: props => {
+          //     this.toolbarProps = props;
+          //     return null;
+          //   }
           // }}
+          // onNavigate={date => {
+          //   this.setState({}, () => this.setState(date));
+          // }}
+          onNavigate={this.handleNavigate}
           onSelectEvent={event => {
             openEditEventDialog(event);
           }}
